@@ -622,6 +622,75 @@
   }
 
   // ============================================================
+  // AMBIENT PAGE CANVAS — extends the hero's drifting blob aesthetic
+  // across the entire page at lower intensity. Fixed to viewport so
+  // cost stays bounded regardless of page length. Same blue palette
+  // as hero so the two read as one continuous atmosphere.
+  // - Cheaper: 3 blobs instead of 5, slower drift, lower alpha
+  // - Throttled to ~30fps via frame skipping (atmospheric motion
+  //   doesn't need 60fps; halves CPU/battery cost)
+  // - Pauses when tab is hidden via Page Visibility API
+  // - Skipped entirely on prefers-reduced-motion
+  // ============================================================
+  const ambientCanvas = $('.ambient-canvas');
+  if (ambientCanvas && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const actx = ambientCanvas.getContext('2d', { alpha: true });
+    let aW = 0, aH = 0;
+    const adpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    function aResize() {
+      aW = window.innerWidth;
+      aH = window.innerHeight;
+      ambientCanvas.width = Math.floor(aW * adpr);
+      ambientCanvas.height = Math.floor(aH * adpr);
+      actx.setTransform(adpr, 0, 0, adpr, 0, 0);
+    }
+    aResize();
+    window.addEventListener('resize', aResize, { passive: true });
+
+    let aRunning = true;
+    document.addEventListener('visibilitychange', () => {
+      aRunning = !document.hidden;
+    });
+
+    const aBlobs = [
+      { color: [ 90, 140, 235], baseX: 0.15, baseY: 0.35, ax: 0.25, ay: 0.20, px: 47, py: 53, radius: 0.70, intensity: 0.22 },
+      { color: [138, 180, 255], baseX: 0.85, baseY: 0.65, ax: 0.20, ay: 0.22, px: 59, py: 41, radius: 0.65, intensity: 0.20 },
+      { color: [115, 155, 245], baseX: 0.50, baseY: 0.50, ax: 0.30, ay: 0.18, px: 71, py: 37, radius: 0.85, intensity: 0.18 },
+    ];
+
+    function drawAmbientBlob(b, t) {
+      const x = (b.baseX + Math.sin(t / (b.px * 100)) * b.ax) * aW;
+      const y = (b.baseY + Math.cos(t / (b.py * 100)) * b.ay) * aH;
+      const r = Math.max(aW, aH) * b.radius;
+      const breath = 0.85 + Math.sin(t / 5700 + b.px) * 0.15;
+      const alpha = b.intensity * breath;
+      const grad = actx.createRadialGradient(x, y, 0, x, y, r);
+      const [cr, cg, cb] = b.color;
+      grad.addColorStop(0,    `rgba(${cr},${cg},${cb},${alpha})`);
+      grad.addColorStop(0.45, `rgba(${cr},${cg},${cb},${alpha * 0.4})`);
+      grad.addColorStop(1,    `rgba(${cr},${cg},${cb},0)`);
+      actx.fillStyle = grad;
+      actx.fillRect(0, 0, aW, aH);
+    }
+
+    let aSkip = false;
+    function aFrame(now) {
+      requestAnimationFrame(aFrame);
+      if (!aRunning) return;
+      aSkip = !aSkip;
+      if (aSkip) return;
+      actx.clearRect(0, 0, aW, aH);
+      actx.globalCompositeOperation = 'lighter';
+      for (let i = 0; i < aBlobs.length; i++) {
+        drawAmbientBlob(aBlobs[i], now);
+      }
+      actx.globalCompositeOperation = 'source-over';
+    }
+    requestAnimationFrame(aFrame);
+  }
+
+  // ============================================================
   // HERO PARALLAX TILT — tilts the .hero-inner block based on cursor
   // position so the headline + subhead feel layered into 3D space.
   // - Subtle: 5deg max in either axis. Bigger reads gimmicky.

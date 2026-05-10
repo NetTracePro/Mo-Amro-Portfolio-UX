@@ -3,7 +3,7 @@
    Cinematic landing + three interactive case study experiences
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 :root {
   --bg:        #06080c;
@@ -90,6 +90,24 @@ body::after {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>");
   opacity: 0.22; mix-blend-mode: overlay;
   pointer-events: none; z-index: 1000;
+}
+
+/* ============== AMBIENT CANVAS (full page, behind everything) ==============
+   Extends the hero's drifting-light-blob aesthetic across the entire page,
+   at lower intensity. Fixed to the viewport so it doesn't bloat with page
+   height — only the visible area paints each frame. Same blue palette as
+   the hero so it reads as one continuous atmosphere, not two effects. */
+.ambient-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  display: block;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ambient-canvas { display: none; }
 }
 
 /* ============== CINEMATIC HERO CANVAS (landing hero) ==============
@@ -292,11 +310,12 @@ nav ul a.cta:hover {
 }
 
 h1.headline {
-  font-family: var(--display);
+  font-family: 'Playfair Display', Georgia, serif;
   font-weight: 600;
-  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  font-style: italic;
+  font-size: clamp(2.8rem, 8vw, 6.5rem);
   line-height: 1.0;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.015em;
   margin-bottom: 1.5rem;
   background: linear-gradient(180deg, #ffffff 0%, #d8e2f5 60%, #aab8d4 100%);
   -webkit-background-clip: text;
@@ -494,11 +513,19 @@ h1.headline .accent-word {
 .preview-visual.is-logo.is-logo--white {
   background: #ffffff;
 }
-/* Modifier: orange gradient — matches the SimpleTouch logo's embedded
-   orange gradient so the contained image blends edge-to-edge with the
-   card frame instead of floating on a dark backdrop. */
+/* Modifier: orange variant — SimpleTouch. The logo PNG already contains
+   its own orange gradient, so the card has no CSS background of its own.
+   The image fills the frame edge-to-edge below. */
 .preview-visual.is-logo.is-logo--orange {
-  background: linear-gradient(135deg, #F8B040 0%, #E89020 100%);
+  background: transparent;
+}
+.preview-visual.is-logo.is-logo--orange img {
+  /* Override the contained sizing — for SimpleTouch we want the logo's
+     own embedded orange field to BE the card, so the image fills the
+     full frame and no dark backdrop bleeds through at the edges. */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .preview-visual.is-logo img {
   /* Contain ensures the entire logo image is visible — no cropping of
@@ -679,17 +706,6 @@ section.contact {
   text-align: center;
   overflow: hidden;
 }
-section.contact::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 50%;
-  transform: translateX(-50%);
-  width: 70%; height: 70%;
-  background: radial-gradient(ellipse 50% 100% at 50% 0%, var(--accent-bleed) 0%, transparent 70%);
-  pointer-events: none;
-  opacity: 0.5;
-  z-index: -1;
-}
 .contact-headline {
   font-family: var(--display);
   font-weight: 600;
@@ -726,7 +742,8 @@ section.contact::before {
 .contact-meta {
   margin-top: 3rem;
   padding-top: 2.5rem;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(90deg, transparent 0%, var(--line) 25%, var(--line) 75%, transparent 100%) 1;
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
@@ -756,7 +773,8 @@ section.contact::before {
 footer.site-footer {
   position: relative;
   z-index: 5;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(90deg, transparent 0%, var(--line) 25%, var(--line) 75%, transparent 100%) 1;
   padding: 1.5rem var(--gutter);
   display: flex;
   justify-content: space-between;
