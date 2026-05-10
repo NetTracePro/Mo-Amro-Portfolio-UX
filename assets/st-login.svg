@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 920" preserveAspectRatio="xMidYMin meet" font-family="-apple-system, BlinkMacSystemFont, 'SF Mono', Consolas, monospace">
+
+  <rect width="1280" height="920" fill="#f7f7f8"/>
+  <rect x="40" y="40" width="1200" height="840" fill="#ffffff" stroke="#cdd0d4" stroke-width="1"/>
+
+  <!-- Title strip -->
+  <rect x="40" y="40" width="1200" height="44" fill="#eef0f3" stroke="#cdd0d4" stroke-width="1"/>
+  <text x="68" y="68" font-size="12" fill="#3a4049" font-weight="600">WIREFRAME — Login screen</text>
+  <text x="1212" y="68" font-size="11" fill="#7d8590" text-anchor="end">SimpleTouch POS · station sign-in · 1280 × 800</text>
+
+  <!-- Browser chrome -->
+  <rect x="80" y="120" width="1120" height="36" fill="#eef0f3" stroke="#cdd0d4" stroke-width="1"/>
+  <circle cx="100" cy="138" r="5" fill="#d8dde3"/>
+  <circle cx="118" cy="138" r="5" fill="#d8dde3"/>
+  <circle cx="136" cy="138" r="5" fill="#d8dde3"/>
+  <rect x="160" y="128" width="320" height="20" rx="4" fill="#ffffff" stroke="#d8dde3" stroke-width="1"/>
+  <text x="175" y="142" font-size="11" fill="#7d8590">app.simpletouchpos.com/login</text>
+
+  <!-- Page area (full-bleed gradient backdrop suggested) -->
+  <rect x="80" y="156" width="1120" height="700" fill="#fafbfc" stroke="#cdd0d4" stroke-width="1"/>
+
+  <!-- Top accent strip (brand blue) -->
+  <rect x="80" y="156" width="1120" height="6" fill="#dee1e6"/>
+  <text x="80" y="183" font-size="10" fill="#c14545">[ 6px brand-blue accent strip · ties login back to brand identity ]</text>
+
+  <!-- ============ HERO BLOCK ============ -->
+  <g>
+    <!-- Logo mark — circle -->
+    <circle cx="640" cy="270" r="32" fill="#ffffff" stroke="#9aa1aa" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="640" y="275" font-size="9" fill="#7d8590" text-anchor="middle">LOGO</text>
+
+    <!-- H1 -->
+    <rect x="500" y="320" width="280" height="36" fill="#dee1e6"/>
+    <text x="640" y="343" font-size="14" fill="#3a4049" text-anchor="middle" font-weight="600">H1 — SimpleTouchPOS</text>
+
+    <!-- Tagline -->
+    <rect x="440" y="370" width="400" height="16" fill="#e8ebef"/>
+    <text x="640" y="382" font-size="10" fill="#7d8590" text-anchor="middle">TAGLINE — Point of Sale software for cafés &amp; restaurants</text>
+  </g>
+
+  <!-- ============ LOGIN CARD ============ -->
+  <g>
+    <rect x="440" y="430" width="400" height="360" fill="#ffffff" stroke="#3a4049" stroke-width="1.5"/>
+
+    <!-- Card heading -->
+    <rect x="468" y="458" width="240" height="22" fill="#dee1e6"/>
+    <text x="588" y="473" font-size="11" fill="#3a4049" text-anchor="middle" font-weight="600">H2 — Sign in to your station</text>
+
+    <!-- Subtitle -->
+    <rect x="468" y="490" width="320" height="14" fill="#e8ebef"/>
+    <text x="468" y="500" font-size="9" fill="#9aa1aa">SUBTITLE — Enter your credentials to start your shift</text>
+
+    <!-- Field 1: User name -->
+    <text x="468" y="535" font-size="9" fill="#7d8590" font-weight="500">USER NAME</text>
+    <rect x="468" y="544" width="344" height="40" fill="#ffffff" stroke="#cdd0d4" stroke-width="1.5"/>
+    <text x="478" y="568" font-size="10" fill="#9aa1aa">company@mail.com</text>
+
+    <!-- Field 2: Password -->
+    <text x="468" y="610" font-size="9" fill="#7d8590" font-weight="500">PASSWORD</text>
+    <rect x="468" y="619" width="344" height="40" fill="#ffffff" stroke="#cdd0d4" stroke-width="1.5"/>
+    <text x="478" y="643" font-size="10" fill="#9aa1aa">••••••••</text>
+
+    <!-- Row: Remember + Forgot -->
+    <rect x="468" y="678" width="14" height="14" fill="none" stroke="#3a4049" stroke-width="1"/>
+    <text x="490" y="690" font-size="10" fill="#3a4049">Remember this station</text>
+    <text x="812" y="690" font-size="10" fill="#5e7eb6" text-anchor="end">Forgot password?</text>
+
+    <!-- Primary button -->
+    <rect x="468" y="710" width="344" height="48" rx="6" fill="#1a1d24"/>
+    <text x="640" y="740" font-size="13" fill="#ffffff" text-anchor="middle" font-weight="600">Sign in →</text>
+  </g>
+
+  <!-- Annotation right side -->
+  <g fill="#c14545" font-size="10">
+    <line x1="850" y1="473" x2="900" y2="473" stroke="#c14545" stroke-width="1"/>
+    <text x="910" y="471">Station-aware sign-in:</text>
+    <text x="910" y="485">"this station" not "this user"</text>
+
+    <line x1="850" y1="690" x2="900" y2="690" stroke="#c14545" stroke-width="1"/>
+    <text x="910" y="688">Forgot password is right-aligned</text>
+    <text x="910" y="702">because it's a secondary action</text>
+
+    <line x1="850" y1="734" x2="900" y2="734" stroke="#c14545" stroke-width="1"/>
+    <text x="910" y="732">Single primary CTA — no</text>
+    <text x="910" y="746">secondary buttons compete</text>
+  </g>
+  <g fill="#c14545" font-size="10">
+    <line x1="430" y1="270" x2="380" y2="270" stroke="#c14545" stroke-width="1"/>
+    <text x="370" y="268" text-anchor="end">Logo above headline,</text>
+    <text x="370" y="282" text-anchor="end">tagline below — establishes</text>
+    <text x="370" y="296" text-anchor="end">brand before login form</text>
+  </g>
+
+  <!-- Footer station pill -->
+  <g>
+    <rect x="475" y="800" width="170" height="28" rx="14" fill="#ffffff" stroke="#cdd0d4" stroke-width="1"/>
+    <circle cx="490" cy="814" r="3" fill="#5cb85c"/>
+    <text x="500" y="818" font-size="9" fill="#3a4049">Station WEAPONX · Online</text>
+    <text x="805" y="818" font-size="9" fill="#9aa1aa" text-anchor="end">v2026.3.0</text>
+  </g>
+
+</svg>

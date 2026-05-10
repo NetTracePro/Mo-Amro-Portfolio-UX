@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>SimpleTouch POS · Mo Amro</title>
+<meta name="description" content="SimpleTouch POS: a retail point-of-sale terminal for cashiers. Includes a working terminal demo and a wireframe-to-finished morph slider." />
+<meta name="theme-color" content="#06080c" />
+
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<nav class="site-nav">
+ <a href="/" class="mark">
+      <svg class="mark-svg" viewBox="0 0 540 490" aria-hidden="true">
+        <path fill="currentColor" d="M386.2,486.2 L386.5,482.5L393.5,482.2 C402.9,481.8 403.6,480.2 400.4,466.4 L398.7,459.3L390.1,458.7 C335.5,454.8 295.7,404.0 295.7,338.5 C295.7,309.6 302.8,284.5 318.3,259.6 L320.7,255.8L316.3,240.7 C311.5,223.7 306.7,202.7 304.9,190.0 C304.2,185.3 303.4,181.2 303.1,180.8 C302.8,180.5 285.3,212.6 264.3,252.3 L226.2,324.5L221.0,324.8 C218.1,325.0 215.2,324.6 214.4,323.9 C212.2,322.1 212.7,315.5 215.5,310.0 L218.0,305.1L207.8,297.3 C178.3,275.0 143.0,239.0 127.2,215.3 C125.3,212.3 123.5,210.2 123.3,210.4 C123.0,210.7 121.8,221.1 120.5,233.7 C104.7,389.2 75.5,463.4 29.3,465.8 C19.2,466.3 18.0,465.6 18.0,459.1 C18.0,453.6 19.2,452.0 23.7,452.0 C25.5,452.0 29.1,451.3 31.7,450.4 C69.4,437.6 95.4,354.9 108.5,206.2 L110.1,187.9L105.1,176.2 C95.4,153.5 92.0,137.1 92.0,112.9 C92.0,82.5 98.8,60.3 116.3,34.2 L122.5,24.9L128.5,25.2 L134.5,25.5L134.4,31.5 C134.4,34.8 133.8,41.5 133.2,46.5 C132.6,51.5 131.1,73.7 130.0,96.0 C128.9,118.3 127.3,146.5 126.5,158.7 L125.0,180.9L129.6,188.7 C148.4,220.6 179.2,254.2 215.4,282.4 C220.8,286.6 225.7,289.7 226.1,289.3 C226.6,288.8 243.6,257.1 263.8,218.9 L300.7,149.4L301.3,135.4 C303.6,89.6 321.2,58.6 354.7,41.6 C360.4,38.8 368.6,38.0 370.8,40.2 C374.5,43.9 372.9,47.5 344.0,102.0 C312.5,161.4 314.8,155.1 317.6,175.2 C319.6,190.1 323.2,207.0 328.1,225.5 L332.1,240.5L342.3,230.4 C365.0,208.1 387.3,197.0 409.6,197.0 C442.6,197.0 460.7,216.6 463.6,255.4 C464.4,266.4 463.5,268.0 456.6,268.0 C451.2,268.0 450.3,266.9 449.5,260.0 C446.2,231.1 435.5,215.9 415.6,211.8 C398.5,208.2 368.4,224.7 346.5,249.8 L338.2,259.3L342.2,270.9 C349.6,292.5 362.8,326.4 380.3,368.6 C389.9,391.7 400.6,418.0 404.0,427.1 C407.4,436.1 410.3,443.7 410.5,443.8 C411.5,444.9 432.3,438.5 440.4,434.7 C470.1,420.6 489.2,397.6 500.3,362.3 C520.5,298.4 500.9,223.9 457.9,201.0 C451.9,197.8 451.0,196.6 451.0,191.9 C451.0,181.7 460.8,182.4 476.6,193.5 C538.1,237.1 538.2,378.9 476.9,430.9 C461.2,444.2 437.4,455.1 419.0,457.6 C414.8,458.1 414.0,458.6 414.5,459.9 C415.7,462.9 417.0,478.2 416.5,481.9 C415.0,490.9 416.7,490.0 400.4,490.0 L385.9,490.0L386.2,486.2 Z M391.1,437.2 C386.8,425.7 381.7,413.0 366.5,376.5 C349.7,336.1 341.6,315.7 333.5,293.2 L327.3,276.0L322.2,286.7 C308.1,316.6 306.0,345.2 315.9,374.0 C329.3,413.3 355.2,438.4 388.2,443.9 C391.1,444.4 393.6,444.8 393.7,444.9 C393.8,444.9 392.7,441.5 391.1,437.2 Z M115.0,109.2 C116.2,86.5 117.0,67.6 116.7,67.4 C115.9,66.5 110.4,81.9 108.4,90.5 C105.3,103.9 105.8,126.4 109.5,140.9 C111.1,147.2 112.5,151.9 112.6,151.4 C112.8,150.9 113.9,131.9 115.0,109.2 Z M334.9,84.8 C338.9,77.2 341.9,71.0 341.7,71.0 C341.4,71.0 338.7,74.3 335.7,78.2 C329.3,86.6 324.9,94.9 321.4,105.1 C316.9,118.6 317.5,117.7 334.9,84.8 Z"/>
+      </svg>
+      <span class="mark-text">Mo Amro</span>
+    </a>
+ <ul>
+ <li class="nav-has-drop">
+ <button type="button" class="nav-drop-trigger" aria-haspopup="true" aria-expanded="false">
+ Work
+ <svg class="nav-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg>
+ </button>
+ <div class="nav-drop">
+ <a href="/case/nettracepro" data-nav="nettracepro" class="nav-drop-item">
+ <div class="nav-drop-num">01</div>
+ <div class="nav-drop-meta">
+ <div class="nav-drop-title">NetTracePro</div>
+ <div class="nav-drop-sub">Marketing operations &amp; design</div>
+ </div>
+ </a>
+ <a href="/case/nan-ya-plastics" data-nav="nan-ya-plastics" class="nav-drop-item">
+ <div class="nav-drop-num">02</div>
+ <div class="nav-drop-meta">
+ <div class="nav-drop-title">Nan Ya Plastics</div>
+ <div class="nav-drop-sub">Marketing &amp; operations</div>
+ </div>
+ </a>
+ <a href="/case/simpletouch" data-nav="simpletouch" class="nav-drop-item">
+ <div class="nav-drop-num">03</div>
+ <div class="nav-drop-meta">
+ <div class="nav-drop-title">SimpleTouch POS</div>
+ <div class="nav-drop-sub">Marketing &amp; project coordination</div>
+ </div>
+ </a>
+ </div>
+ </li>
+ <li><a href="/#about">About</a></li>
+ <li class="cta-li"><a href="/#contact" class="cta">Contact</a></li>
+ </ul>
+</nav>
+
+<section class="case-hero">
+ <div class="case-hero-img-wrap">
+ <img class="case-hero-img" src="/assets/simpletouch-hero.jpg" alt="SimpleTouch POS terminal" />
+ </div>
+ <div class="case-hero-overlay">
+ <div class="case-hero-eyebrow">CASE 03 · MARKETING &amp; PROJECT COORDINATOR</div>
+    <h1 class="case-hero-title">Marketing &amp; Project Coordinator at DigiComm Solutions.</h1>
+ <div class="case-hero-cta is-pair">
+ <a href="/assets/simpletouch-wireframes.html" target="_blank" rel="noopener noreferrer" class="live-site-btn is-secondary">
+ <span>Open wireframes</span>
+ <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+ <path d="M7 17L17 7"/>
+ <path d="M7 7h10v10"/>
+ </svg>
+ </a>
+ <a href="/assets/simpletouch-mockup.html" target="_blank" rel="noopener noreferrer" class="live-site-btn">
+ <span>Open live mockup</span>
+ <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+ <path d="M7 17L17 7"/>
+ <path d="M7 7h10v10"/>
+ </svg>
+ </a>
+ </div>
+ <div class="case-hero-meta">
+ <div><span>Employer</span>DigiComm Solutions Inc.</div>
+ <div><span>Year</span>Oct 2023 – Aug 2024</div>
+ <div><span>Role</span>Marketing &amp; Project Coordinator</div>
+ <div><span>Surface</span>Figma · Usability testing · Sprint coordination</div>
+ </div>
+ </div>
+</section>
+
+<article class="case-body">
+ <p class="case-summary reveal">
+ At DigiComm Solutions I delivered SimpleTouch POS, a retail
+ point-of-sale application, on time and within budget by gathering
+ user requirements, coordinating a UX/UI design team in Figma, and
+ managing sprint timelines and stakeholder approvals. I conducted
+ usability testing with end users and translated feedback into
+ actionable UX improvements that reduced friction and improved task
+ completion across core workflows. Produced user flows, wireframes,
+ high-fidelity mockups, and interactive prototypes in Figma, and
+ maintained UX and brand consistency through a reusable component
+ library, color system, and typography standards. Below: the design
+ process from wireframes through the working terminal demo.
+ </p>
+
+ <!-- ============ LOGIN WIREFRAME ============ -->
+ <h3 class="case-section-h reveal">01 · Sign-in screen</h3>
+ <div class="case-prose reveal">
+ <p>
+ The cashier's first screen each shift. I designed it station-aware
+ ("Sign in to your station," not "Sign in") because in retail the
+ device is the persistent context, not the user — multiple cashiers
+ share a single terminal across shifts. Single primary CTA, no
+ competing buttons. Forgot-password is right-aligned because it's
+ a secondary action.
+ </p>
+ </div>
+
+ <div class="demo-frame reveal">
+ <div class="demo-head">
+ <div class="demo-dots"><span></span><span></span><span></span></div>
+ <div class="demo-title">SimpleTouch · sign-in screen wireframe</div>
+ <div class="demo-status">Figma · low-fi annotated</div>
+ </div>
+ <div class="wireframe-shell">
+ <img src="/assets/st-login.svg" alt="Wireframe of the SimpleTouch POS sign-in screen showing a centered logo, station-aware H1, sign-in form with user/password fields and remember/forgot row, primary CTA, and station status pill at bottom" loading="lazy" />
+ </div>
+ </div>
+
+ <!-- ============ DASHBOARD WIREFRAME ============ -->
+ <h3 class="case-section-h reveal">02 · Dashboard</h3>
+ <div class="case-prose reveal">
+ <p>
+ After sign-in, the cashier lands on a POS-first dashboard. The hero
+ "Open Register" CTA banner sits above the metrics so a cashier
+ starting a shift can begin ringing up orders in under a second. KPIs
+ (revenue, transactions, average ticket, low stock) are scannable but
+ secondary. Quick actions and recent transactions fill out the bottom
+ of the page for managers and end-of-shift workflows.
+ </p>
+ </div>
+
+ <div class="demo-frame reveal">
+ <div class="demo-head">
+ <div class="demo-dots"><span></span><span></span><span></span></div>
+ <div class="demo-title">SimpleTouch · dashboard wireframe</div>
+ <div class="demo-status">Figma · sidebar + main content</div>
+ </div>
+ <div class="wireframe-shell">
+ <img src="/assets/st-dashboard.svg" alt="Wireframe of the SimpleTouch POS dashboard showing a left sidebar with main and configure nav sections, top breadcrumb and search bar, prominent Open Register CTA banner, four-up KPI grid, and quick actions plus recent transactions panels" loading="lazy" />
+ </div>
+ </div>
+
+ <!-- ============ POS REGISTER WIREFRAME ============ -->
+ <h3 class="case-section-h reveal">03 · Register / cashier screen</h3>
+ <div class="case-prose reveal">
+ <p>
+ The actual cashier interface. Two columns: the order side on the left
+ (totals, line items, numpad, action button rows) and the catalog side
+ on the right (search with barcode-scan support, customer banner,
+ categories pinned left + items grid that scrolls). The Charge button
+ sits in the bottom-right as the largest target on the screen, in
+ green to signal "go." Action buttons follow a color system —
+ red=destructive, yellow=hold/payment, blue=info — so risk level
+ reads at a glance.
+ </p>
+ </div>
+
+ <div class="demo-frame reveal">
+ <div class="demo-head">
+ <div class="demo-dots"><span></span><span></span><span></span></div>
+ <div class="demo-title">SimpleTouch · register screen wireframe</div>
+ <div class="demo-status">Figma · two-column cashier layout</div>
+ </div>
+ <div class="wireframe-shell">
+ <img src="/assets/st-pos-register.svg" alt="Wireframe of the SimpleTouch POS register/terminal screen showing a persistent topbar with back button, invoice ID, clock, and user pill, plus a two-column body: left column with totals card, lines table, numpad and color-coded action buttons; right column with search bar, customer banner, categories list, items grid, and a large green Charge button" loading="lazy" />
+ </div>
+ </div>
+
+ <!-- ============ POS TERMINAL ============ -->
+ <h3 class="case-section-h reveal">04 · POS terminal</h3>
+ <div class="case-prose reveal">
+ <p>
+ A working recreation of the SimpleTouch terminal flow.
+ <strong>PIN login</strong> (any 4 digits, or just hit Enter) →
+ <strong>select items</strong> from the catalog →
+ <strong>checkout</strong>. The sidebar tracks where you are in the flow.
+ </p>
+ </div>
+
+ <div class="demo-frame reveal">
+ <div class="demo-head">
+ <div class="demo-dots"><span></span><span></span><span></span></div>
+ <div class="demo-title">SimpleTouch · Register #4 · live demo</div>
+ <div class="demo-status"><span class="live"></span>idle</div>
+ </div>
+
+ <div class="pos">
+ <div class="pos-screen">
+ <div class="pos-bar">
+ <div class="pos-bar-dot"></div>
+ <div class="pos-bar-dot"></div>
+ <div class="pos-bar-dot"></div>
+ <div class="pos-bar-title">SimpleTouch · Register #4</div>
+ <div style="font-family: monospace; font-size: 0.7rem;">9:42 AM</div>
+ </div>
+
+ <!-- Step 1: Login -->
+ <div class="pos-step pos-login active" data-step="login">
+ <div class="pos-login-logo">Simple<span class="accent">Touch</span></div>
+ <div class="pos-login-sub">Enter your 4-digit PIN to unlock</div>
+ <div class="pos-pin-display"></div>
+ <div class="pos-login-keypad">
+ <button class="pos-key" data-value="1">1</button>
+ <button class="pos-key" data-value="2">2</button>
+ <button class="pos-key" data-value="3">3</button>
+ <button class="pos-key" data-value="4">4</button>
+ <button class="pos-key" data-value="5">5</button>
+ <button class="pos-key" data-value="6">6</button>
+ <button class="pos-key" data-value="7">7</button>
+ <button class="pos-key" data-value="8">8</button>
+ <button class="pos-key" data-value="9">9</button>
+ <button class="pos-key" data-value="clear" style="font-size: 0.85rem;">clear</button>
+ <button class="pos-key" data-value="0">0</button>
+ <button class="pos-key" data-value="enter" style="background: #5BA8D6; color: #fff; font-size: 0.85rem;">enter</button>
+ </div>
+ </div>
+
+ <!-- Step 2: Catalog -->
+ <div class="pos-step pos-catalog" data-step="catalog">
+ <div class="pos-cat-head">
+ <div style="font-family: var(--display); font-size: 0.95rem; font-weight: 600; color: #1a1a1a;">Beverages</div>
+ <div class="pos-cat-search">Search items…</div>
+ </div>
+ <div class="pos-cat-grid">
+ <button class="pos-item" data-name="Latte" data-price="4.50">
+ <div class="pos-item-name">Latte</div>
+ <div class="pos-item-price">$4.50</div>
+ </button>
+ <button class="pos-item" data-name="Cold Brew" data-price="5.00">
+ <div class="pos-item-name">Cold Brew</div>
+ <div class="pos-item-price">$5.00</div>
+ </button>
+ <button class="pos-item" data-name="Cappuccino" data-price="4.75">
+ <div class="pos-item-name">Cappuccino</div>
+ <div class="pos-item-price">$4.75</div>
+ </button>
+ <button class="pos-item" data-name="Matcha" data-price="5.25">
+ <div class="pos-item-name">Matcha Latte</div>
+ <div class="pos-item-price">$5.25</div>
+ </button>
+ <button class="pos-item" data-name="Green Tea" data-price="3.50">
+ <div class="pos-item-name">Green Tea</div>
+ <div class="pos-item-price">$3.50</div>
+ </button>
+ <button class="pos-item" data-name="Espresso" data-price="3.00">
+ <div class="pos-item-name">Espresso</div>
+ <div class="pos-item-price">$3.00</div>
+ </button>
+ <button class="pos-item" data-name="Smoothie" data-price="6.00">
+ <div class="pos-item-name">Smoothie</div>
+ <div class="pos-item-price">$6.00</div>
+ </button>
+ <button class="pos-item" data-name="Iced Tea" data-price="3.75">
+ <div class="pos-item-name">Iced Tea</div>
+ <div class="pos-item-price">$3.75</div>
+ </button>
+ <button class="pos-item" data-name="Mocha" data-price="5.50">
+ <div class="pos-item-name">Mocha</div>
+ <div class="pos-item-price">$5.50</div>
+ </button>
+ </div>
+ <div class="pos-cat-foot">
+ <div>
+ <div style="font-size: 0.65rem; font-family: monospace; color: #888; letter-spacing: 0.06em; text-transform: uppercase;">Total</div>
+ <div class="total">$0.00</div>
+ </div>
+ <button class="pos-checkout" disabled>Charge → Checkout</button>
+ </div>
+ </div>
+
+ <!-- Step 3: Checkout success -->
+ <div class="pos-step pos-checkout-screen" data-step="checkout">
+ <div class="pos-success-icon">✓</div>
+ <div class="pos-success-title">Payment complete</div>
+ <div class="pos-success-amount">$0.00 charged · authorization XXX-0000</div>
+ <button class="pos-reset">Reset for next customer</button>
+ </div>
+ </div>
+
+ <div class="pos-flow">
+ <div class="pos-flow-title">Customer flow</div>
+ <div class="pos-flow-step active" data-flow="login">
+ <div class="pos-flow-num">1</div>
+ <div class="pos-flow-info">
+ <div class="pos-flow-name">Authenticate</div>
+ <div class="pos-flow-desc">PIN login · 4 digits</div>
+ </div>
+ </div>
+ <div class="pos-flow-step" data-flow="catalog">
+ <div class="pos-flow-num">2</div>
+ <div class="pos-flow-info">
+ <div class="pos-flow-name">Build cart</div>
+ <div class="pos-flow-desc">Tap items · running total</div>
+ </div>
+ </div>
+ <div class="pos-flow-step" data-flow="checkout">
+ <div class="pos-flow-num">3</div>
+ <div class="pos-flow-info">
+ <div class="pos-flow-name">Charge</div>
+ <div class="pos-flow-desc">Confirmation · receipt</div>
+ </div>
+ </div>
+
+ <div style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 0.62rem; color: var(--ink-3); letter-spacing: 0.04em; line-height: 1.6;">
+ The real terminal handled offline-first behaviour, receipt printing, drawer hardware,
+ and 4 different payment surfaces. This demo is the front-end pattern only.
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- ============ WIREFRAME → FINISHED MORPH ============ -->
+ <h3 class="case-section-h reveal">05 · Wireframe to finished design</h3>
+ <div class="case-prose reveal">
+ <p>
+ Component libraries, color tokens, and typography rules lived in Figma
+ so consecutive screens stayed consistent with one another. The slider
+ below morphs between the <strong>wireframe stage</strong> (gray-on-white,
+ structure only) and the <strong>finished design</strong>. Drag the
+ slider to see the design come together.
+ </p>
+ </div>
+
+ <div class="demo-frame reveal">
+ <div class="demo-head">
+ <div class="demo-dots"><span></span><span></span><span></span></div>
+ <div class="demo-title">SimpleTouch · design progression</div>
+ <div class="demo-status"><span class="live"></span>interactive</div>
+ </div>
+
+ <div class="morph">
+ <div class="morph-canvas" style="--t: 0;">
+ <div class="morph-layer wireframe">
+ <img src="/assets/simpletouch-wireframe.svg" alt="SimpleTouch wireframe" />
+ </div>
+ <div class="morph-layer hifi">
+ <img src="/assets/simpletouch-hifi.svg" alt="SimpleTouch finished design" />
+ </div>
+ </div>
+ <div class="morph-hint">
+ <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+ <path d="M2 8h12M10 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+ </svg>
+ Drag the slider right to advance the design from wireframe to finished
+ </div>
+ <div class="morph-controls">
+ <div class="morph-label is-active">Wireframe</div>
+ <input type="range" min="0" max="1" step="0.01" value="0" class="morph-slider" aria-label="Design progression" />
+ <div class="morph-label right">Finished<span class="pct">0%</span></div>
+ </div>
+ </div>
+ </div>
+
+ <h3 class="case-section-h reveal">What I'd do differently</h3>
+ <div class="case-prose reveal">
+ <p>
+ The single biggest win would have been earlier moderated usability
+ sessions with cashiers on real terminals, before we locked in flow
+ patterns. Testing happened late enough that the feedback shaped polish
+ rather than core decisions. On a future engagement, I would build the
+ test cadence into the sprint structure from week one.
+ </p>
+ </div>
+</article>
+
+<div class="next-case">
+ <div>
+ <div class="nc-label">Back to first case</div>
+ <a href="/case/nettracepro" class="nc-link">
+ NetTracePro, marketing operations &amp; design
+ <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+ </a>
+ </div>
+ <a href="/" class="back">← Back to index</a>
+</div>
+
+<footer class="site-footer">
+ <span>© <span data-year>2026</span> Mo Amro</span>
+ <span>Houston, TX</span>
+</footer>
+
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1640" preserveAspectRatio="xMidYMin meet" font-family="-apple-system, BlinkMacSystemFont, 'SF Mono', Consolas, monospace">
+
+  <rect width="900" height="1640" fill="#f7f7f8"/>
+  <rect x="40" y="40" width="820" height="1560" fill="#ffffff" stroke="#cdd0d4" stroke-width="1"/>
+
+  <!-- Title strip -->
+  <rect x="40" y="40" width="820" height="44" fill="#eef0f3" stroke="#cdd0d4" stroke-width="1"/>
+  <text x="68" y="68" font-size="12" fill="#3a4049" font-weight="600">MOBILE WIREFRAME — nettracepro.com</text>
+  <text x="832" y="68" font-size="11" fill="#7d8590" text-anchor="end">375 × 812 · iPhone 14</text>
+
+  <!-- Phone frame -->
+  <g>
+    <rect x="200" y="120" width="375" height="1480" rx="36" fill="#ffffff" stroke="#3a4049" stroke-width="2"/>
+    <!-- Notch -->
+    <rect x="340" y="130" width="95" height="22" rx="11" fill="#1a1d24"/>
+
+    <!-- ============ MOBILE NAV ============ -->
+    <g>
+      <rect x="200" y="180" width="375" height="56" fill="#ffffff"/>
+      <line x1="200" y1="236" x2="575" y2="236" stroke="#e2e5e9" stroke-width="1"/>
+      <!-- Logo -->
+      <rect x="220" y="196" width="80" height="22" fill="none" stroke="#9aa1aa" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="260" y="211" font-size="9" fill="#7d8590" text-anchor="middle">LOGO</text>
+      <!-- Hamburger menu -->
+      <rect x="525" y="200" width="34" height="14" fill="none" stroke="#3a4049" stroke-width="1"/>
+      <line x1="530" y1="204" x2="554" y2="204" stroke="#3a4049" stroke-width="1.5"/>
+      <line x1="530" y1="208" x2="554" y2="208" stroke="#3a4049" stroke-width="1.5"/>
+      <line x1="530" y1="212" x2="554" y2="212" stroke="#3a4049" stroke-width="1.5"/>
+    </g>
+
+    <!-- ============ HERO ============ -->
+    <g>
+      <rect x="200" y="236" width="375" height="420" fill="#fafbfc"/>
+      <!-- Eyebrow -->
+      <rect x="280" y="280" width="215" height="14" fill="none" stroke="#a4abb4" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="387" y="291" font-size="9" fill="#7d8590" text-anchor="middle">HOUSTON DIGITAL AGENCY</text>
+      <!-- H1 stacked -->
+      <rect x="220" y="320" width="335" height="32" fill="#dee1e6"/>
+      <rect x="240" y="356" width="295" height="32" fill="#dee1e6"/>
+      <text x="387" y="378" font-size="11" fill="#3a4049" text-anchor="middle" font-weight="600">H1 — PREMIUM WEBSITES</text>
+      <!-- Subhead -->
+      <rect x="240" y="408" width="295" height="14" fill="#e8ebef"/>
+      <rect x="265" y="426" width="245" height="14" fill="#e8ebef"/>
+      <rect x="285" y="444" width="205" height="14" fill="#e8ebef"/>
+      <!-- Stacked CTAs (mobile = full-width buttons) -->
+      <rect x="240" y="490" width="295" height="48" rx="24" fill="#1a1d24"/>
+      <text x="387" y="520" font-size="12" fill="#ffffff" text-anchor="middle">Start your project →</text>
+      <rect x="240" y="550" width="295" height="48" rx="24" fill="none" stroke="#1a1d24" stroke-width="1.5"/>
+      <text x="387" y="580" font-size="12" fill="#1a1d24" text-anchor="middle">See pricing</text>
+      <!-- Trust strip -->
+      <line x1="240" y1="624" x2="535" y2="624" stroke="#cdd0d4" stroke-width="1" stroke-dasharray="2 4"/>
+      <text x="387" y="648" font-size="9" fill="#9aa1aa" text-anchor="middle">[ trust strip · client logos ]</text>
+    </g>
+
+    <!-- ============ SERVICES (stacked) ============ -->
+    <g>
+      <line x1="200" y1="656" x2="575" y2="656" stroke="#e2e5e9" stroke-width="1"/>
+      <text x="387" y="700" font-size="10" fill="#7d8590" text-anchor="middle">"WHAT WE BUILD"</text>
+      <rect x="280" y="716" width="215" height="22" fill="#dee1e6"/>
+      <text x="387" y="731" font-size="11" fill="#3a4049" text-anchor="middle" font-weight="600">H2 — Three services</text>
+
+      <!-- Service Card 1 -->
+      <rect x="240" y="770" width="295" height="120" fill="#ffffff" stroke="#cdd0d4" stroke-width="1"/>
+      <rect x="260" y="790" width="36" height="36" fill="none" stroke="#9aa1aa" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="278" y="813" font-size="8" fill="#9aa1aa" text-anchor="middle">ICON</text>
+      <rect x="310" y="794" width="180" height="14" fill="#dee1e6"/>
+      <text x="400" y="804" font-size="10" fill="#3a4049" text-anchor="middle" font-weight="600">Web Design &amp; Dev</text>
+      <rect x="260" y="844" width="255" height="8" fill="#eef0f3"/>
+      <rect x="260" y="858" width="220" height="8" fill="#eef0f3"/>
+      <rect x="260" y="872" width="240" height="8" fill="#eef0f3"/>
+
+      <!-- Service Card 2 -->
+      <rect x="240" y="910" width="295" height="120" fill="#ffffff" stroke="#cdd0d4" stroke-width="1"/>
+      <rect x="260" y="930" width="36" height="36" fill="none" stroke="#9aa1aa" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="278" y="953" font-size="8" fill="#9aa1aa" text-anchor="middle">ICON</text>
+      <rect x="310" y="934" width="180" height="14" fill="#dee1e6"/>
+      <text x="400" y="944" font-size="10" fill="#3a4049" text-anchor="middle" font-weight="600">Mobile App Dev</text>
+      <rect x="260" y="984" width="255" height="8" fill="#eef0f3"/>
+      <rect x="260" y="998" width="220" height="8" fill="#eef0f3"/>
+      <rect x="260" y="1012" width="240" height="8" fill="#eef0f3"/>
+
+      <!-- Service Card 3 -->
+      <rect x="240" y="1050" width="295" height="120" fill="#ffffff" stroke="#cdd0d4" stroke-width="1"/>
+      <rect x="260" y="1070" width="36" height="36" fill="none" stroke="#9aa1aa" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="278" y="1093" font-size="8" fill="#9aa1aa" text-anchor="middle">ICON</text>
+      <rect x="310" y="1074" width="180" height="14" fill="#dee1e6"/>
+      <text x="400" y="1084" font-size="10" fill="#3a4049" text-anchor="middle" font-weight="600">SEO</text>
+      <rect x="260" y="1124" width="255" height="8" fill="#eef0f3"/>
+      <rect x="260" y="1138" width="220" height="8" fill="#eef0f3"/>
+      <rect x="260" y="1152" width="240" height="8" fill="#eef0f3"/>
+    </g>
+
+    <!-- ============ PRICING TEASER ============ -->
+    <g>
+      <line x1="200" y1="1200" x2="575" y2="1200" stroke="#e2e5e9" stroke-width="1"/>
+      <rect x="280" y="1230" width="215" height="22" fill="#dee1e6"/>
+      <text x="387" y="1245" font-size="10" fill="#3a4049" text-anchor="middle" font-weight="600">Honest pricing</text>
+      <rect x="240" y="1268" width="295" height="10" fill="#e8ebef"/>
+      <rect x="260" y="1284" width="255" height="10" fill="#e8ebef"/>
+      <rect x="260" y="1320" width="255" height="44" rx="22" fill="#1a1d24"/>
+      <text x="387" y="1346" font-size="11" fill="#ffffff" text-anchor="middle">View pricing →</text>
+    </g>
+
+    <!-- ============ PORTFOLIO TEASE (single col on mobile) ============ -->
+    <g>
+      <line x1="200" y1="1390" x2="575" y2="1390" stroke="#e2e5e9" stroke-width="1"/>
+      <text x="387" y="1422" font-size="10" fill="#7d8590" text-anchor="middle">RECENT WORK</text>
+      <rect x="240" y="1440" width="295" height="80" fill="none" stroke="#9aa1aa" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="387" y="1485" font-size="9" fill="#9aa1aa" text-anchor="middle">PROJECT 1 (preview)</text>
+      <rect x="240" y="1530" width="295" height="80" fill="none" stroke="#9aa1aa" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="387" y="1575" font-size="9" fill="#9aa1aa" text-anchor="middle">PROJECT 2 (preview)</text>
+    </g>
+  </g>
+
+  <!-- ============ ANNOTATIONS (right side) ============ -->
+  <g fill="#c14545" font-size="10">
+    <!-- Hamburger annotation -->
+    <line x1="600" y1="208" x2="650" y2="208" stroke="#c14545" stroke-width="1"/>
+    <text x="660" y="206">5 nav items collapse to</text>
+    <text x="660" y="220">hamburger at &lt; 768px</text>
+
+    <!-- Hero annotation -->
+    <line x1="600" y1="490" x2="650" y2="490" stroke="#c14545" stroke-width="1"/>
+    <text x="660" y="488">CTAs become full-width</text>
+    <text x="660" y="502">stacked, primary first</text>
+
+    <!-- Services annotation -->
+    <line x1="600" y1="830" x2="650" y2="830" stroke="#c14545" stroke-width="1"/>
+    <text x="660" y="828">Service cards collapse</text>
+    <text x="660" y="842">3-up grid → vertical stack</text>
+
+    <!-- Pricing annotation -->
+    <line x1="600" y1="1340" x2="650" y2="1340" stroke="#c14545" stroke-width="1"/>
+    <text x="660" y="1338">Same primary CTA pattern</text>
+    <text x="660" y="1352">consistent across viewports</text>
+
+    <!-- Portfolio annotation -->
+    <line x1="600" y1="1480" x2="650" y2="1480" stroke="#c14545" stroke-width="1"/>
+    <text x="660" y="1478">Portfolio grid 4-up → 1-up,</text>
+    <text x="660" y="1492">show 2 above fold + scroll</text>
+  </g>
+
+</svg>

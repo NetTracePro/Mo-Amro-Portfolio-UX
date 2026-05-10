@@ -1,0 +1,201 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="orangeBrand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F4A446"/>
+      <stop offset="100%" stop-color="#DC7510"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer frame -->
+  <rect x="20" y="20" width="760" height="460" rx="10" fill="#FAFBFC" stroke="#cdd0d4" stroke-width="1"/>
+
+  <!-- ============ DARK TOPBAR (matches real app) ============ -->
+  <rect x="20" y="20" width="760" height="40" rx="10" fill="#0F1419"/>
+  <rect x="20" y="40" width="760" height="20" fill="#0F1419"/>
+
+  <!-- Back button -->
+  <rect x="34" y="30" width="62" height="20" rx="4" fill="#2a3037"/>
+  <text x="65" y="44" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" fill="#ffffff">← Back</text>
+
+  <!-- Logo wordmark -->
+  <text x="115" y="44" font-family="-apple-system, sans-serif" font-size="12" font-weight="700" fill="#ffffff">SimpleTouch<tspan fill="#5BA8D6">POS</tspan></text>
+
+  <!-- Invoice ID -->
+  <text x="285" y="44" font-family="-apple-system, sans-serif" font-size="10" fill="#7d8590">Invoice</text>
+  <text x="320" y="44" font-family="-apple-system, sans-serif" font-size="10" font-weight="600" fill="#ffffff">#INV-0048</text>
+
+  <!-- Clock right -->
+  <text x="640" y="44" font-family="-apple-system, sans-serif" font-size="10" fill="#9aa1aa">11:42 AM</text>
+
+  <!-- Admin pill -->
+  <circle cx="710" cy="40" r="8" fill="url(#orangeBrand)"/>
+  <text x="710" y="44" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" font-weight="700" fill="#ffffff">A</text>
+  <text x="724" y="44" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" fill="#ffffff">Admin</text>
+
+  <!-- ============ LEFT COLUMN: ORDER SIDE ============ -->
+  <!-- Totals card -->
+  <rect x="40" y="80" width="340" height="100" rx="6" fill="#ffffff" stroke="#e2e5e9" stroke-width="1"/>
+  <text x="56" y="100" font-family="-apple-system, sans-serif" font-size="9" font-weight="600" fill="#9aa1aa">SUB TOTAL</text>
+  <text x="364" y="100" text-anchor="end" font-family="ui-monospace, monospace" font-size="12" font-weight="600" fill="#3a4049">$13.25</text>
+  <line x1="56" y1="108" x2="364" y2="108" stroke="#eef0f3" stroke-width="1"/>
+  <text x="56" y="124" font-family="-apple-system, sans-serif" font-size="9" font-weight="600" fill="#9aa1aa">TAX (8.25%)</text>
+  <text x="364" y="124" text-anchor="end" font-family="ui-monospace, monospace" font-size="12" font-weight="600" fill="#3a4049">$1.09</text>
+  <line x1="56" y1="132" x2="364" y2="132" stroke="#eef0f3" stroke-width="1"/>
+  <rect x="46" y="140" width="328" height="32" rx="4" fill="#0F1419"/>
+  <text x="60" y="160" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" fill="#ffffff">TOTAL</text>
+  <text x="364" y="162" text-anchor="end" font-family="ui-monospace, monospace" font-size="14" font-weight="700" fill="#ffffff">$14.34</text>
+
+  <!-- Lines list -->
+  <rect x="40" y="190" width="340" height="160" rx="6" fill="#ffffff" stroke="#e2e5e9" stroke-width="1"/>
+  <rect x="40" y="190" width="340" height="24" rx="6" fill="#eef0f3"/>
+  <rect x="40" y="206" width="340" height="8" fill="#eef0f3"/>
+  <text x="56" y="206" font-family="-apple-system, sans-serif" font-size="9" font-weight="600" fill="#7d8590">ITEM</text>
+  <text x="280" y="206" font-family="-apple-system, sans-serif" font-size="9" font-weight="600" fill="#7d8590">QTY</text>
+  <text x="346" y="206" font-family="-apple-system, sans-serif" font-size="9" font-weight="600" fill="#7d8590">PRICE</text>
+
+  <!-- Line item 1 (selected) -->
+  <rect x="40" y="222" width="340" height="28" fill="#fff7ec"/>
+  <rect x="40" y="222" width="3" height="28" fill="#F18A1F"/>
+  <text x="56" y="240" font-family="-apple-system, sans-serif" font-size="11" fill="#3a4049">Latte</text>
+  <text x="282" y="240" font-family="ui-monospace, monospace" font-size="11" fill="#3a4049">1</text>
+  <text x="364" y="240" text-anchor="end" font-family="ui-monospace, monospace" font-size="11" fill="#3a4049">$5.25</text>
+
+  <!-- Line item 2 -->
+  <rect x="40" y="252" width="340" height="28" fill="#ffffff"/>
+  <text x="56" y="270" font-family="-apple-system, sans-serif" font-size="11" fill="#3a4049">Cappuccino</text>
+  <text x="282" y="270" font-family="ui-monospace, monospace" font-size="11" fill="#3a4049">1</text>
+  <text x="364" y="270" text-anchor="end" font-family="ui-monospace, monospace" font-size="11" fill="#3a4049">$5.00</text>
+
+  <!-- Line item 3 -->
+  <rect x="40" y="282" width="340" height="28" fill="#fafbfc"/>
+  <text x="56" y="300" font-family="-apple-system, sans-serif" font-size="11" fill="#3a4049">Butter Croissant</text>
+  <text x="282" y="300" font-family="ui-monospace, monospace" font-size="11" fill="#3a4049">1</text>
+  <text x="364" y="300" text-anchor="end" font-family="ui-monospace, monospace" font-size="11" fill="#3a4049">$3.00</text>
+
+  <!-- Numpad -->
+  <rect x="40" y="358" width="340" height="32" rx="6" fill="#ffffff" stroke="#e2e5e9" stroke-width="1"/>
+  <rect x="48" y="364" width="60" height="20" rx="3" fill="#fafbfc" stroke="#cdd0d4" stroke-width="1"/>
+  <text x="78" y="378" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" fill="#3a4049">↑</text>
+  <rect x="116" y="364" width="60" height="20" rx="3" fill="#0F1419"/>
+  <text x="146" y="378" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" fill="#ffffff">+</text>
+  <rect x="184" y="364" width="60" height="20" rx="3" fill="#fafbfc" stroke="#cdd0d4" stroke-width="1"/>
+  <text x="214" y="378" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" fill="#3a4049">#</text>
+  <rect x="252" y="364" width="60" height="20" rx="3" fill="#0F1419"/>
+  <text x="282" y="378" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" fill="#ffffff">−</text>
+  <rect x="320" y="364" width="52" height="20" rx="3" fill="#fafbfc" stroke="#cdd0d4" stroke-width="1"/>
+  <text x="346" y="378" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" fill="#3a4049">↓</text>
+
+  <!-- Color-coded action buttons (real app uses red/yellow/blue) -->
+  <rect x="40" y="400" width="50" height="22" rx="3" fill="#fee5e5" stroke="#e0a8a8" stroke-width="1"/>
+  <text x="65" y="415" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="600" fill="#c14545">Clear</text>
+  <rect x="98" y="400" width="50" height="22" rx="3" fill="#fee5e5" stroke="#e0a8a8" stroke-width="1"/>
+  <text x="123" y="415" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="600" fill="#c14545">Delete</text>
+  <rect x="156" y="400" width="50" height="22" rx="3" fill="#fef3dc" stroke="#d49a3e" stroke-width="1"/>
+  <text x="181" y="415" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="600" fill="#a06d12">Hold</text>
+  <rect x="214" y="400" width="50" height="22" rx="3" fill="#e0eef9" stroke="#5e7eb6" stroke-width="1"/>
+  <text x="239" y="415" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="600" fill="#3a5680">Recall</text>
+  <rect x="272" y="400" width="50" height="22" rx="3" fill="#e0eef9" stroke="#5e7eb6" stroke-width="1"/>
+  <text x="297" y="415" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="600" fill="#3a5680">Manual</text>
+  <rect x="330" y="400" width="50" height="22" rx="3" fill="#fef3dc" stroke="#d49a3e" stroke-width="1"/>
+  <text x="355" y="415" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="600" fill="#a06d12">Discount</text>
+
+  <!-- Action row 2 -->
+  <rect x="40" y="430" width="50" height="22" rx="3" fill="#fee5e5" stroke="#e0a8a8" stroke-width="1"/>
+  <text x="65" y="445" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="600" fill="#c14545">Exit</text>
+  <rect x="98" y="430" width="50" height="22" rx="3" fill="#e0eef9" stroke="#5e7eb6" stroke-width="1"/>
+  <text x="123" y="445" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="600" fill="#3a5680">Options</text>
+  <rect x="156" y="430" width="50" height="22" rx="3" fill="#fef3dc" stroke="#d49a3e" stroke-width="1"/>
+  <text x="181" y="445" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="600" fill="#a06d12">Payout</text>
+  <rect x="214" y="430" width="50" height="22" rx="3" fill="#e0eef9" stroke="#5e7eb6" stroke-width="1"/>
+  <text x="239" y="445" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="600" fill="#3a5680">Customer</text>
+  <rect x="272" y="430" width="50" height="22" rx="3" fill="#e0eef9" stroke="#5e7eb6" stroke-width="1"/>
+  <text x="297" y="445" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="600" fill="#3a5680">English</text>
+  <rect x="330" y="430" width="50" height="22" rx="3" fill="#e0eef9" stroke="#5e7eb6" stroke-width="1"/>
+  <text x="355" y="445" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="600" fill="#3a5680">Settings</text>
+
+  <!-- ============ RIGHT COLUMN: CATALOG SIDE ============ -->
+  <!-- Search bar -->
+  <rect x="395" y="80" width="365" height="28" rx="4" fill="#ffffff" stroke="#cdd0d4" stroke-width="1"/>
+  <text x="406" y="98" font-family="-apple-system, sans-serif" font-size="10" fill="#9aa1aa">🔍 Search items or scan barcode…</text>
+
+  <!-- Customer banner -->
+  <rect x="395" y="118" width="365" height="36" rx="4" fill="#ffffff" stroke="#cdd0d4" stroke-width="1"/>
+  <circle cx="410" cy="136" r="9" fill="#dee1e6"/>
+  <text x="426" y="132" font-family="-apple-system, sans-serif" font-size="8" font-weight="600" fill="#9aa1aa">CUSTOMER</text>
+  <text x="426" y="146" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" fill="#3a4049">Cash Customer · Walk-in</text>
+  <text x="744" y="140" text-anchor="end" font-family="-apple-system, sans-serif" font-size="10" fill="#5BA8D6">Change →</text>
+
+  <!-- Categories sidebar -->
+  <rect x="395" y="164" width="100" height="232" rx="4" fill="#ffffff" stroke="#cdd0d4" stroke-width="1"/>
+  <rect x="395" y="164" width="100" height="22" rx="4" fill="#eef0f3"/>
+  <text x="408" y="178" font-family="-apple-system, sans-serif" font-size="9" font-weight="600" fill="#7d8590">CATEGORIES</text>
+
+  <rect x="403" y="194" width="84" height="24" rx="3" fill="#5BA8D6"/>
+  <text x="411" y="210" font-family="-apple-system, sans-serif" font-size="10" font-weight="600" fill="#ffffff">Espresso</text>
+  <rect x="403" y="222" width="84" height="24" rx="3" fill="#ffffff"/>
+  <text x="411" y="238" font-family="-apple-system, sans-serif" font-size="10" fill="#3a4049">Brewed</text>
+  <rect x="403" y="250" width="84" height="24" rx="3" fill="#ffffff"/>
+  <text x="411" y="266" font-family="-apple-system, sans-serif" font-size="10" fill="#3a4049">Tea</text>
+  <rect x="403" y="278" width="84" height="24" rx="3" fill="#ffffff"/>
+  <text x="411" y="294" font-family="-apple-system, sans-serif" font-size="10" fill="#3a4049">Pastries</text>
+  <rect x="403" y="306" width="84" height="24" rx="3" fill="#ffffff"/>
+  <text x="411" y="322" font-family="-apple-system, sans-serif" font-size="10" fill="#3a4049">Sandwiches</text>
+  <rect x="403" y="334" width="84" height="24" rx="3" fill="#ffffff"/>
+  <text x="411" y="350" font-family="-apple-system, sans-serif" font-size="10" fill="#3a4049">Cold Drinks</text>
+
+  <!-- Items grid -->
+  <rect x="505" y="164" width="255" height="232" rx="4" fill="#ffffff" stroke="#cdd0d4" stroke-width="1"/>
+  <rect x="505" y="164" width="255" height="22" rx="4" fill="#eef0f3"/>
+  <text x="518" y="178" font-family="-apple-system, sans-serif" font-size="9" font-weight="600" fill="#7d8590">ITEMS</text>
+
+  <!-- 4 item tiles - row 1 -->
+  <g>
+    <rect x="513" y="194" width="58" height="56" rx="4" fill="#fafbfc" stroke="#e2e5e9" stroke-width="1"/>
+    <circle cx="542" cy="212" r="8" fill="#8B4513"/>
+    <text x="542" y="232" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" font-weight="600" fill="#3a4049">Espresso</text>
+    <text x="542" y="244" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#5cb85c">$3.50</text>
+
+    <rect x="577" y="194" width="58" height="56" rx="4" fill="#fafbfc" stroke="#e2e5e9" stroke-width="1"/>
+    <circle cx="606" cy="212" r="8" fill="#9c5520"/>
+    <text x="606" y="232" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" font-weight="600" fill="#3a4049">Macchiato</text>
+    <text x="606" y="244" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#5cb85c">$4.00</text>
+
+    <rect x="641" y="194" width="58" height="56" rx="4" fill="#fafbfc" stroke="#e2e5e9" stroke-width="1"/>
+    <circle cx="670" cy="212" r="8" fill="#a86434"/>
+    <text x="670" y="232" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" font-weight="600" fill="#3a4049">Cortado</text>
+    <text x="670" y="244" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#5cb85c">$4.50</text>
+
+    <rect x="705" y="194" width="48" height="56" rx="4" fill="#fafbfc" stroke="#e2e5e9" stroke-width="1"/>
+    <circle cx="729" cy="212" r="8" fill="#8B4513"/>
+    <text x="729" y="232" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" font-weight="600" fill="#3a4049">Americano</text>
+    <text x="729" y="244" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#5cb85c">$3.75</text>
+  </g>
+
+  <!-- Row 2 -->
+  <g>
+    <rect x="513" y="258" width="58" height="56" rx="4" fill="#fef3dc" stroke="#F18A1F" stroke-width="1.5"/>
+    <circle cx="542" cy="276" r="8" fill="#d4b18a"/>
+    <text x="542" y="296" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" font-weight="600" fill="#3a4049">Latte</text>
+    <text x="542" y="308" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#5cb85c">$5.25</text>
+
+    <rect x="577" y="258" width="58" height="56" rx="4" fill="#fafbfc" stroke="#e2e5e9" stroke-width="1"/>
+    <circle cx="606" cy="276" r="8" fill="#c9b393"/>
+    <text x="606" y="296" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" font-weight="600" fill="#3a4049">Cappuccino</text>
+    <text x="606" y="308" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#5cb85c">$5.00</text>
+
+    <rect x="641" y="258" width="58" height="56" rx="4" fill="#fafbfc" stroke="#e2e5e9" stroke-width="1"/>
+    <circle cx="670" cy="276" r="8" fill="#e1cba2"/>
+    <text x="670" y="296" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" font-weight="600" fill="#3a4049">Flat White</text>
+    <text x="670" y="308" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#5cb85c">$5.25</text>
+
+    <rect x="705" y="258" width="48" height="56" rx="4" fill="#fafbfc" stroke="#e2e5e9" stroke-width="1"/>
+    <circle cx="729" cy="276" r="8" fill="#5d3a1f"/>
+    <text x="729" y="296" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" font-weight="600" fill="#3a4049">Mocha</text>
+    <text x="729" y="308" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#5cb85c">$5.75</text>
+  </g>
+
+  <!-- Charge button (big green, matching real app) -->
+  <rect x="395" y="408" width="365" height="44" rx="6" fill="#4CAF50"/>
+  <text x="577" y="436" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="700" fill="#ffffff">Charge $14.34 →</text>
+
+</svg>

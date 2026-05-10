@@ -1,0 +1,243 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1480 980" preserveAspectRatio="xMidYMin meet" font-family="-apple-system, BlinkMacSystemFont, 'SF Mono', Consolas, monospace">
+
+  <rect width="1480" height="980" fill="#f7f7f8"/>
+  <rect x="40" y="40" width="1400" height="900" fill="#ffffff" stroke="#cdd0d4" stroke-width="1"/>
+
+  <!-- Title strip -->
+  <rect x="40" y="40" width="1400" height="44" fill="#eef0f3" stroke="#cdd0d4" stroke-width="1"/>
+  <text x="68" y="68" font-size="12" fill="#3a4049" font-weight="600">WIREFRAME — POS Register / Terminal</text>
+  <text x="1412" y="68" font-size="11" fill="#7d8590" text-anchor="end">SimpleTouch POS · cashier screen · 1280 × 800</text>
+
+  <!-- Browser chrome -->
+  <rect x="80" y="120" width="1320" height="36" fill="#eef0f3" stroke="#cdd0d4" stroke-width="1"/>
+  <circle cx="100" cy="138" r="5" fill="#d8dde3"/>
+  <circle cx="118" cy="138" r="5" fill="#d8dde3"/>
+  <circle cx="136" cy="138" r="5" fill="#d8dde3"/>
+  <rect x="160" y="128" width="380" height="20" rx="4" fill="#ffffff" stroke="#d8dde3" stroke-width="1"/>
+  <text x="175" y="142" font-size="11" fill="#7d8590">app.simpletouchpos.com/pos</text>
+
+  <!-- ============ TOPBAR (full width) ============ -->
+  <g>
+    <rect x="80" y="156" width="1320" height="48" fill="#1a1d24"/>
+    <!-- Back button -->
+    <rect x="100" y="170" width="80" height="20" rx="4" fill="#3a4049"/>
+    <text x="140" y="183" font-size="10" fill="#ffffff" text-anchor="middle">← Back</text>
+    <!-- Divider -->
+    <line x1="200" y1="170" x2="200" y2="190" stroke="#5e6873" stroke-width="1"/>
+    <!-- Logo -->
+    <text x="220" y="184" font-size="11" fill="#ffffff" font-weight="600">SimpleTouchPOS</text>
+    <!-- Divider -->
+    <line x1="345" y1="170" x2="345" y2="190" stroke="#5e6873" stroke-width="1"/>
+    <!-- Invoice ID -->
+    <text x="365" y="184" font-size="10" fill="#9aa1aa">Invoice</text>
+    <text x="408" y="184" font-size="10" fill="#ffffff" font-weight="600">#INV-0048</text>
+    <!-- Spacer to right-align rest -->
+    <text x="1170" y="184" font-size="10" fill="#9aa1aa" text-anchor="end">11:42:08 AM</text>
+    <line x1="1180" y1="170" x2="1180" y2="190" stroke="#5e6873" stroke-width="1"/>
+    <!-- User pill -->
+    <circle cx="1205" cy="180" r="9" fill="#3a4049"/>
+    <text x="1205" y="184" font-size="9" fill="#ffffff" text-anchor="middle" font-weight="600">A</text>
+    <text x="1222" y="184" font-size="10" fill="#ffffff" font-weight="600">Admin</text>
+  </g>
+
+  <!-- Topbar annotation -->
+  <text x="80" y="226" font-size="10" fill="#c14545">[ Persistent topbar: invoice ID always visible · clock for shift discipline · escape route via Back never hidden ]</text>
+
+  <!-- ============ POS BODY: 2 COLUMNS ============ -->
+  <!-- LEFT COLUMN: order side -->
+  <g>
+    <rect x="80" y="240" width="640" height="700" fill="#fafbfc" stroke="#cdd0d4" stroke-width="1"/>
+
+    <!-- Totals card -->
+    <rect x="100" y="260" width="600" height="120" fill="#ffffff" stroke="#cdd0d4" stroke-width="1"/>
+    <text x="120" y="288" font-size="9" fill="#9aa1aa">SUB TOTAL</text>
+    <text x="680" y="288" font-size="11" fill="#3a4049" font-weight="600" text-anchor="end">$0.00</text>
+    <line x1="120" y1="300" x2="680" y2="300" stroke="#e2e5e9" stroke-width="1"/>
+    <text x="120" y="320" font-size="9" fill="#9aa1aa">TAX (8.25%)</text>
+    <text x="680" y="320" font-size="11" fill="#3a4049" font-weight="600" text-anchor="end">$0.00</text>
+    <line x1="120" y1="332" x2="680" y2="332" stroke="#e2e5e9" stroke-width="1"/>
+    <rect x="120" y="340" width="580" height="32" fill="#dee1e6"/>
+    <text x="135" y="362" font-size="11" fill="#3a4049" font-weight="700">TOTAL</text>
+    <text x="685" y="362" font-size="14" fill="#3a4049" font-weight="700" text-anchor="end">$0.00</text>
+
+    <!-- Lines header -->
+    <rect x="100" y="400" width="600" height="32" fill="#eef0f3" stroke="#cdd0d4" stroke-width="1"/>
+    <text x="120" y="420" font-size="9" fill="#7d8590" font-weight="600">ITEM NAME</text>
+    <text x="450" y="420" font-size="9" fill="#7d8590" font-weight="600">QTY</text>
+    <text x="540" y="420" font-size="9" fill="#7d8590" font-weight="600">PRICE</text>
+
+    <!-- Lines body (empty state placeholder) -->
+    <rect x="100" y="432" width="600" height="180" fill="#ffffff" stroke="#cdd0d4" stroke-width="1"/>
+    <text x="400" y="510" font-size="11" fill="#9aa1aa" text-anchor="middle">[ Line items appear here as cashier adds them ]</text>
+    <text x="400" y="528" font-size="9" fill="#9aa1aa" text-anchor="middle">Empty state · scrollable list when populated</text>
+
+    <!-- Numpad (5 buttons in a row) -->
+    <rect x="100" y="624" width="600" height="56" fill="#ffffff" stroke="#cdd0d4" stroke-width="1"/>
+    <rect x="116" y="638" width="100" height="28" fill="#fafbfc" stroke="#cdd0d4" stroke-width="1"/>
+    <text x="166" y="656" font-size="11" fill="#3a4049" text-anchor="middle" font-weight="600">↑</text>
+    <rect x="232" y="638" width="100" height="28" fill="#1a1d24"/>
+    <text x="282" y="656" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">+</text>
+    <rect x="348" y="638" width="100" height="28" fill="#fafbfc" stroke="#cdd0d4" stroke-width="1"/>
+    <text x="398" y="656" font-size="11" fill="#3a4049" text-anchor="middle" font-weight="600">#</text>
+    <rect x="464" y="638" width="100" height="28" fill="#1a1d24"/>
+    <text x="514" y="656" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">−</text>
+    <rect x="580" y="638" width="100" height="28" fill="#fafbfc" stroke="#cdd0d4" stroke-width="1"/>
+    <text x="630" y="656" font-size="11" fill="#3a4049" text-anchor="middle" font-weight="600">↓</text>
+
+    <!-- Action row 1 (6 buttons) -->
+    <g>
+      <rect x="100" y="700" width="92" height="40" fill="#ffe5e5" stroke="#c14545" stroke-width="1"/>
+      <text x="146" y="724" font-size="10" fill="#c14545" text-anchor="middle" font-weight="600">Clear</text>
+      <rect x="200" y="700" width="92" height="40" fill="#ffe5e5" stroke="#c14545" stroke-width="1"/>
+      <text x="246" y="724" font-size="10" fill="#c14545" text-anchor="middle" font-weight="600">Delete</text>
+      <rect x="300" y="700" width="92" height="40" fill="#fff5e0" stroke="#d49a3e" stroke-width="1"/>
+      <text x="346" y="724" font-size="10" fill="#a06d12" text-anchor="middle" font-weight="600">Hold</text>
+      <rect x="400" y="700" width="92" height="40" fill="#e0eef9" stroke="#5e7eb6" stroke-width="1"/>
+      <text x="446" y="724" font-size="10" fill="#3a5680" text-anchor="middle" font-weight="600">Recall</text>
+      <rect x="500" y="700" width="100" height="40" fill="#e0eef9" stroke="#5e7eb6" stroke-width="1"/>
+      <text x="550" y="724" font-size="10" fill="#3a5680" text-anchor="middle" font-weight="600">Change Price</text>
+      <rect x="608" y="700" width="92" height="40" fill="#e0eef9" stroke="#5e7eb6" stroke-width="1"/>
+      <text x="654" y="724" font-size="10" fill="#3a5680" text-anchor="middle" font-weight="600">Manual</text>
+    </g>
+
+    <!-- Action row 2 (6 buttons) -->
+    <g>
+      <rect x="100" y="748" width="92" height="40" fill="#ffe5e5" stroke="#c14545" stroke-width="1"/>
+      <text x="146" y="772" font-size="10" fill="#c14545" text-anchor="middle" font-weight="600">Exit</text>
+      <rect x="200" y="748" width="92" height="40" fill="#e0eef9" stroke="#5e7eb6" stroke-width="1"/>
+      <text x="246" y="772" font-size="10" fill="#3a5680" text-anchor="middle" font-weight="600">Options</text>
+      <rect x="300" y="748" width="92" height="40" fill="#fff5e0" stroke="#d49a3e" stroke-width="1"/>
+      <text x="346" y="772" font-size="10" fill="#a06d12" text-anchor="middle" font-weight="600">Payout</text>
+      <rect x="400" y="748" width="100" height="40" fill="#e0eef9" stroke="#5e7eb6" stroke-width="1"/>
+      <text x="450" y="772" font-size="10" fill="#3a5680" text-anchor="middle" font-weight="600">Customer Items</text>
+      <rect x="508" y="748" width="92" height="40" fill="#fff5e0" stroke="#d49a3e" stroke-width="1"/>
+      <text x="554" y="772" font-size="10" fill="#a06d12" text-anchor="middle" font-weight="600">Discount</text>
+      <rect x="608" y="748" width="92" height="40" fill="#e0eef9" stroke="#5e7eb6" stroke-width="1"/>
+      <text x="654" y="772" font-size="10" fill="#3a5680" text-anchor="middle" font-weight="600">English</text>
+    </g>
+
+    <text x="100" y="820" font-size="10" fill="#c14545">[ Action buttons: red=destructive · yellow=hold/payment · blue=info — colors map to risk level ]</text>
+  </g>
+
+  <!-- RIGHT COLUMN: catalog side -->
+  <g>
+    <rect x="740" y="240" width="660" height="700" fill="#fafbfc" stroke="#cdd0d4" stroke-width="1"/>
+
+    <!-- Search bar -->
+    <rect x="760" y="260" width="540" height="40" fill="#ffffff" stroke="#cdd0d4" stroke-width="1"/>
+    <text x="775" y="284" font-size="10" fill="#9aa1aa">🔍 Search items or scan barcode…</text>
+    <rect x="1308" y="260" width="72" height="40" fill="#fafbfc" stroke="#cdd0d4" stroke-width="1"/>
+    <text x="1344" y="284" font-size="10" fill="#7d8590" text-anchor="middle">⌨</text>
+
+    <!-- Customer banner -->
+    <rect x="760" y="320" width="620" height="56" fill="#ffffff" stroke="#cdd0d4" stroke-width="1"/>
+    <circle cx="784" cy="348" r="14" fill="#dee1e6"/>
+    <text x="808" y="342" font-size="9" fill="#9aa1aa">CUSTOMER</text>
+    <text x="808" y="360" font-size="11" fill="#3a4049" font-weight="600">Cash Customer · Walk-in</text>
+    <text x="1360" y="354" font-size="10" fill="#5e7eb6" text-anchor="end">Change →</text>
+
+    <!-- Catalog split: categories left, items right -->
+    <!-- Categories col -->
+    <rect x="760" y="396" width="180" height="440" fill="#ffffff" stroke="#cdd0d4" stroke-width="1"/>
+    <rect x="760" y="396" width="180" height="32" fill="#eef0f3"/>
+    <text x="775" y="416" font-size="10" fill="#7d8590" font-weight="600">CATEGORIES</text>
+
+    <rect x="760" y="428" width="180" height="36" fill="#dee1e6"/>
+    <text x="775" y="450" font-size="10" fill="#3a4049" font-weight="600">All</text>
+    <rect x="760" y="464" width="180" height="36" fill="#ffffff"/>
+    <text x="775" y="486" font-size="10" fill="#3a4049">Coffee</text>
+    <rect x="760" y="500" width="180" height="36" fill="#ffffff"/>
+    <text x="775" y="522" font-size="10" fill="#3a4049">Tea</text>
+    <rect x="760" y="536" width="180" height="36" fill="#ffffff"/>
+    <text x="775" y="558" font-size="10" fill="#3a4049">Pastries</text>
+    <rect x="760" y="572" width="180" height="36" fill="#ffffff"/>
+    <text x="775" y="594" font-size="10" fill="#3a4049">Sandwiches</text>
+    <rect x="760" y="608" width="180" height="36" fill="#ffffff"/>
+    <text x="775" y="630" font-size="10" fill="#3a4049">Drinks</text>
+
+    <!-- Items col -->
+    <rect x="956" y="396" width="424" height="440" fill="#ffffff" stroke="#cdd0d4" stroke-width="1"/>
+    <rect x="956" y="396" width="424" height="32" fill="#eef0f3"/>
+    <text x="971" y="416" font-size="10" fill="#7d8590" font-weight="600">ITEMS</text>
+
+    <!-- Items grid 3 cols -->
+    <g>
+      <rect x="972" y="444" width="120" height="116" fill="#fafbfc" stroke="#cdd0d4" stroke-width="1"/>
+      <rect x="988" y="456" width="88" height="60" fill="#ffffff" stroke="#9aa1aa" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="1032" y="492" font-size="9" fill="#9aa1aa" text-anchor="middle">IMG</text>
+      <text x="1032" y="534" font-size="10" fill="#3a4049" text-anchor="middle" font-weight="600">Espresso</text>
+      <text x="1032" y="548" font-size="9" fill="#5cb85c" text-anchor="middle">$3.50</text>
+
+      <rect x="1108" y="444" width="120" height="116" fill="#fafbfc" stroke="#cdd0d4" stroke-width="1"/>
+      <rect x="1124" y="456" width="88" height="60" fill="#ffffff" stroke="#9aa1aa" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="1168" y="492" font-size="9" fill="#9aa1aa" text-anchor="middle">IMG</text>
+      <text x="1168" y="534" font-size="10" fill="#3a4049" text-anchor="middle" font-weight="600">Cappuccino</text>
+      <text x="1168" y="548" font-size="9" fill="#5cb85c" text-anchor="middle">$4.50</text>
+
+      <rect x="1244" y="444" width="120" height="116" fill="#fafbfc" stroke="#cdd0d4" stroke-width="1"/>
+      <rect x="1260" y="456" width="88" height="60" fill="#ffffff" stroke="#9aa1aa" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="1304" y="492" font-size="9" fill="#9aa1aa" text-anchor="middle">IMG</text>
+      <text x="1304" y="534" font-size="10" fill="#3a4049" text-anchor="middle" font-weight="600">Latte</text>
+      <text x="1304" y="548" font-size="9" fill="#5cb85c" text-anchor="middle">$4.75</text>
+
+      <rect x="972" y="572" width="120" height="116" fill="#fafbfc" stroke="#cdd0d4" stroke-width="1"/>
+      <rect x="988" y="584" width="88" height="60" fill="#ffffff" stroke="#9aa1aa" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="1032" y="620" font-size="9" fill="#9aa1aa" text-anchor="middle">IMG</text>
+      <text x="1032" y="662" font-size="10" fill="#3a4049" text-anchor="middle" font-weight="600">Americano</text>
+      <text x="1032" y="676" font-size="9" fill="#5cb85c" text-anchor="middle">$3.75</text>
+
+      <rect x="1108" y="572" width="120" height="116" fill="#fafbfc" stroke="#cdd0d4" stroke-width="1"/>
+      <rect x="1124" y="584" width="88" height="60" fill="#ffffff" stroke="#9aa1aa" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="1168" y="620" font-size="9" fill="#9aa1aa" text-anchor="middle">IMG</text>
+      <text x="1168" y="662" font-size="10" fill="#3a4049" text-anchor="middle" font-weight="600">Mocha</text>
+      <text x="1168" y="676" font-size="9" fill="#5cb85c" text-anchor="middle">$5.00</text>
+
+      <rect x="1244" y="572" width="120" height="116" fill="#fafbfc" stroke="#cdd0d4" stroke-width="1"/>
+      <rect x="1260" y="584" width="88" height="60" fill="#ffffff" stroke="#9aa1aa" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="1304" y="620" font-size="9" fill="#9aa1aa" text-anchor="middle">IMG</text>
+      <text x="1304" y="662" font-size="10" fill="#3a4049" text-anchor="middle" font-weight="600">Croissant</text>
+      <text x="1304" y="676" font-size="9" fill="#5cb85c" text-anchor="middle">$3.25</text>
+
+      <rect x="972" y="700" width="120" height="116" fill="#fafbfc" stroke="#cdd0d4" stroke-width="1"/>
+      <rect x="988" y="712" width="88" height="60" fill="#ffffff" stroke="#9aa1aa" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="1032" y="748" font-size="9" fill="#9aa1aa" text-anchor="middle">IMG</text>
+      <text x="1032" y="790" font-size="10" fill="#3a4049" text-anchor="middle" font-weight="600">Muffin</text>
+      <text x="1032" y="804" font-size="9" fill="#5cb85c" text-anchor="middle">$2.75</text>
+
+      <rect x="1108" y="700" width="120" height="116" fill="#fafbfc" stroke="#cdd0d4" stroke-width="1"/>
+      <rect x="1124" y="712" width="88" height="60" fill="#ffffff" stroke="#9aa1aa" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="1168" y="748" font-size="9" fill="#9aa1aa" text-anchor="middle">IMG</text>
+      <text x="1168" y="790" font-size="10" fill="#3a4049" text-anchor="middle" font-weight="600">Sandwich</text>
+      <text x="1168" y="804" font-size="9" fill="#5cb85c" text-anchor="middle">$8.50</text>
+
+      <rect x="1244" y="700" width="120" height="116" fill="#fafbfc" stroke="#cdd0d4" stroke-width="1"/>
+      <rect x="1260" y="712" width="88" height="60" fill="#ffffff" stroke="#9aa1aa" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="1304" y="748" font-size="9" fill="#9aa1aa" text-anchor="middle">IMG</text>
+      <text x="1304" y="790" font-size="10" fill="#3a4049" text-anchor="middle" font-weight="600">Bagel</text>
+      <text x="1304" y="804" font-size="9" fill="#5cb85c" text-anchor="middle">$3.50</text>
+    </g>
+
+    <!-- Charge button (large, primary) -->
+    <rect x="760" y="852" width="620" height="64" rx="8" fill="#5cb85c"/>
+    <text x="1070" y="892" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="700">Charge $0.00 →</text>
+    <text x="760" y="940" font-size="10" fill="#c14545">[ Charge button: green = "go" · disabled when total = $0 · biggest target on the screen ]</text>
+  </g>
+
+  <!-- Right-side annotations -->
+  <g fill="#c14545" font-size="10">
+    <line x1="1390" y1="284" x2="1410" y2="284" stroke="#c14545" stroke-width="1"/>
+    <text x="1420" y="282">Search + barcode</text>
+    <text x="1420" y="296">scan share input</text>
+
+    <line x1="1390" y1="354" x2="1410" y2="354" stroke="#c14545" stroke-width="1"/>
+    <text x="1420" y="352">Customer = "Walk-in"</text>
+    <text x="1420" y="366">by default · 1-click</text>
+    <text x="1420" y="380">to attach a CRM record</text>
+
+    <line x1="1390" y1="500" x2="1410" y2="500" stroke="#c14545" stroke-width="1"/>
+    <text x="1420" y="498">Categories pin left,</text>
+    <text x="1420" y="512">items grid scrolls,</text>
+    <text x="1420" y="526">tap = add to order</text>
+  </g>
+
+</svg>

@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 880" preserveAspectRatio="xMidYMin meet" font-family="-apple-system, BlinkMacSystemFont, 'SF Mono', Consolas, monospace">
+
+  <rect width="1280" height="880" fill="#f7f7f8"/>
+  <rect x="40" y="40" width="1200" height="800" fill="#ffffff" stroke="#cdd0d4" stroke-width="1"/>
+
+  <!-- Title strip -->
+  <rect x="40" y="40" width="1200" height="44" fill="#eef0f3" stroke="#cdd0d4" stroke-width="1"/>
+  <text x="68" y="68" font-size="12" fill="#3a4049" font-weight="600">SITEMAP — nettracepro.com</text>
+  <text x="1212" y="68" font-size="11" fill="#7d8590" text-anchor="end">v1 · Jan 2026</text>
+
+  <!-- Annotation -->
+  <text x="80" y="118" font-size="10" fill="#c14545">[ 5-page primary IA · all conversion paths lead to Contact ]</text>
+
+  <!-- ============ ROOT NODE (Home) ============ -->
+  <g>
+    <rect x="540" y="150" width="200" height="68" fill="#1a1d24" stroke="#1a1d24" stroke-width="1.5"/>
+    <text x="640" y="180" font-size="10" fill="#9aa1aa" text-anchor="middle">0.0</text>
+    <text x="640" y="200" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="600">Home /</text>
+    <text x="640" y="240" font-size="9" fill="#7d8590" text-anchor="middle">[ entry point · conversion-optimized ]</text>
+  </g>
+
+  <!-- Tree connectors from Home down to 5 primary pages -->
+  <g stroke="#9aa1aa" stroke-width="1.5" fill="none">
+    <!-- Vertical drop from Home -->
+    <line x1="640" y1="218" x2="640" y2="290"/>
+    <!-- Horizontal spine -->
+    <line x1="180" y1="290" x2="1100" y2="290"/>
+    <!-- Verticals down to each child -->
+    <line x1="180" y1="290" x2="180" y2="340"/>
+    <line x1="410" y1="290" x2="410" y2="340"/>
+    <line x1="640" y1="290" x2="640" y2="340"/>
+    <line x1="870" y1="290" x2="870" y2="340"/>
+    <line x1="1100" y1="290" x2="1100" y2="340"/>
+  </g>
+
+  <!-- ============ PRIMARY PAGES (5) ============ -->
+  <!-- 1. Services -->
+  <g>
+    <rect x="100" y="340" width="160" height="60" fill="#ffffff" stroke="#3a4049" stroke-width="1.5"/>
+    <text x="180" y="362" font-size="9" fill="#9aa1aa" text-anchor="middle">1.0</text>
+    <text x="180" y="382" font-size="12" fill="#3a4049" text-anchor="middle" font-weight="500">Services</text>
+  </g>
+  <!-- 2. Pricing -->
+  <g>
+    <rect x="330" y="340" width="160" height="60" fill="#ffffff" stroke="#3a4049" stroke-width="1.5"/>
+    <text x="410" y="362" font-size="9" fill="#9aa1aa" text-anchor="middle">2.0</text>
+    <text x="410" y="382" font-size="12" fill="#3a4049" text-anchor="middle" font-weight="500">Pricing</text>
+  </g>
+  <!-- 3. Portfolio -->
+  <g>
+    <rect x="560" y="340" width="160" height="60" fill="#ffffff" stroke="#3a4049" stroke-width="1.5"/>
+    <text x="640" y="362" font-size="9" fill="#9aa1aa" text-anchor="middle">3.0</text>
+    <text x="640" y="382" font-size="12" fill="#3a4049" text-anchor="middle" font-weight="500">Portfolio</text>
+  </g>
+  <!-- 4. About -->
+  <g>
+    <rect x="790" y="340" width="160" height="60" fill="#ffffff" stroke="#3a4049" stroke-width="1.5"/>
+    <text x="870" y="362" font-size="9" fill="#9aa1aa" text-anchor="middle">4.0</text>
+    <text x="870" y="382" font-size="12" fill="#3a4049" text-anchor="middle" font-weight="500">About</text>
+  </g>
+  <!-- 5. Contact -->
+  <g>
+    <rect x="1020" y="340" width="160" height="60" fill="#dee1e6" stroke="#3a4049" stroke-width="1.5"/>
+    <text x="1100" y="362" font-size="9" fill="#9aa1aa" text-anchor="middle">5.0</text>
+    <text x="1100" y="382" font-size="12" fill="#3a4049" text-anchor="middle" font-weight="600">Contact</text>
+  </g>
+
+  <!-- Annotation under Contact (conversion goal) -->
+  <text x="1100" y="425" font-size="10" fill="#c14545" text-anchor="middle">[ conversion goal ]</text>
+
+  <!-- Tree connectors from primary pages down to sub-pages -->
+  <g stroke="#cdd0d4" stroke-width="1" fill="none" stroke-dasharray="3 3">
+    <line x1="180" y1="400" x2="180" y2="490"/>
+    <line x1="100" y1="490" x2="260" y2="490"/>
+    <line x1="100" y1="490" x2="100" y2="540"/>
+    <line x1="180" y1="490" x2="180" y2="540"/>
+    <line x1="260" y1="490" x2="260" y2="540"/>
+
+    <line x1="410" y1="400" x2="410" y2="490"/>
+    <line x1="350" y1="490" x2="470" y2="490"/>
+    <line x1="350" y1="490" x2="350" y2="540"/>
+    <line x1="470" y1="490" x2="470" y2="540"/>
+
+    <line x1="640" y1="400" x2="640" y2="540"/>
+    <line x1="870" y1="400" x2="870" y2="540"/>
+    <line x1="1100" y1="400" x2="1100" y2="540"/>
+  </g>
+
+  <!-- ============ SUB-PAGES ============ -->
+  <!-- Services sub-pages -->
+  <g>
+    <rect x="60" y="540" width="80" height="44" fill="#fafbfc" stroke="#9aa1aa" stroke-width="1"/>
+    <text x="100" y="560" font-size="8" fill="#9aa1aa" text-anchor="middle">1.1</text>
+    <text x="100" y="572" font-size="10" fill="#3a4049" text-anchor="middle">Web Dev</text>
+    <rect x="140" y="540" width="80" height="44" fill="#fafbfc" stroke="#9aa1aa" stroke-width="1"/>
+    <text x="180" y="560" font-size="8" fill="#9aa1aa" text-anchor="middle">1.2</text>
+    <text x="180" y="572" font-size="10" fill="#3a4049" text-anchor="middle">Mobile App</text>
+    <rect x="220" y="540" width="80" height="44" fill="#fafbfc" stroke="#9aa1aa" stroke-width="1"/>
+    <text x="260" y="560" font-size="8" fill="#9aa1aa" text-anchor="middle">1.3</text>
+    <text x="260" y="572" font-size="10" fill="#3a4049" text-anchor="middle">SEO</text>
+  </g>
+
+  <!-- Pricing sub-pages -->
+  <g>
+    <rect x="310" y="540" width="80" height="44" fill="#fafbfc" stroke="#9aa1aa" stroke-width="1"/>
+    <text x="350" y="560" font-size="8" fill="#9aa1aa" text-anchor="middle">2.1</text>
+    <text x="350" y="572" font-size="10" fill="#3a4049" text-anchor="middle">Tiers</text>
+    <rect x="430" y="540" width="80" height="44" fill="#fafbfc" stroke="#9aa1aa" stroke-width="1"/>
+    <text x="470" y="560" font-size="8" fill="#9aa1aa" text-anchor="middle">2.2</text>
+    <text x="470" y="572" font-size="10" fill="#3a4049" text-anchor="middle">FAQ</text>
+  </g>
+
+  <!-- Portfolio sub-page (case study modal/page) -->
+  <g>
+    <rect x="600" y="540" width="80" height="44" fill="#fafbfc" stroke="#9aa1aa" stroke-width="1"/>
+    <text x="640" y="560" font-size="8" fill="#9aa1aa" text-anchor="middle">3.1</text>
+    <text x="640" y="572" font-size="10" fill="#3a4049" text-anchor="middle">Case</text>
+  </g>
+
+  <!-- About sub-pages -->
+  <g>
+    <rect x="830" y="540" width="80" height="44" fill="#fafbfc" stroke="#9aa1aa" stroke-width="1"/>
+    <text x="870" y="560" font-size="8" fill="#9aa1aa" text-anchor="middle">4.1</text>
+    <text x="870" y="572" font-size="10" fill="#3a4049" text-anchor="middle">Process</text>
+  </g>
+
+  <!-- Contact sub-page -->
+  <g>
+    <rect x="1060" y="540" width="80" height="44" fill="#fafbfc" stroke="#9aa1aa" stroke-width="1"/>
+    <text x="1100" y="560" font-size="8" fill="#9aa1aa" text-anchor="middle">5.1</text>
+    <text x="1100" y="572" font-size="10" fill="#3a4049" text-anchor="middle">Thank you</text>
+  </g>
+
+  <!-- Legend / footer -->
+  <line x1="80" y1="700" x2="1200" y2="700" stroke="#e2e5e9" stroke-width="1"/>
+  <text x="80" y="730" font-size="10" fill="#3a4049" font-weight="600">LEGEND</text>
+  <rect x="80" y="745" width="20" height="14" fill="#1a1d24"/>
+  <text x="110" y="756" font-size="10" fill="#7d8590">Entry point</text>
+  <rect x="220" y="745" width="20" height="14" fill="#dee1e6" stroke="#3a4049" stroke-width="1"/>
+  <text x="250" y="756" font-size="10" fill="#7d8590">Conversion goal</text>
+  <rect x="400" y="745" width="20" height="14" fill="#ffffff" stroke="#3a4049" stroke-width="1"/>
+  <text x="430" y="756" font-size="10" fill="#7d8590">Primary page</text>
+  <rect x="560" y="745" width="20" height="14" fill="#fafbfc" stroke="#9aa1aa" stroke-width="1"/>
+  <text x="590" y="756" font-size="10" fill="#7d8590">Sub-page</text>
+
+  <text x="80" y="800" font-size="10" fill="#c14545">[ flat-ish IA — sub-pages reachable in 2 clicks from Home, no deeper nesting ]</text>
+
+</svg>

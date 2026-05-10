@@ -1,0 +1,1881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SimpleTouchPOS</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; width: 100%; overflow: hidden; }
+
+  body {
+    background: #FAFBFC;
+    color: #0F1419;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button { font-family: inherit; cursor: pointer; }
+  input { font-family: inherit; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  .screen { display: none; height: 100vh; width: 100vw; }
+  .screen.active { display: flex; }
+
+  /* ==========================================================
+     LOGIN SCREEN — centered, simple, brand-forward
+     ========================================================== */
+  #screen-login.active {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(155deg, #F4A446 0%, #F18A1F 50%, #DC7510 100%);
+    padding: 24px;
+    position: relative;
+    overflow: auto;
+  }
+
+  /* Soft top blue strip echoing the brand */
+  #screen-login::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: #5BA8D6;
+  }
+
+  /* Decorative soft circles */
+  #screen-login::after {
+    content: "";
+    position: absolute;
+    top: 8%; right: -8%;
+    width: 480px; height: 480px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .login-hero {
+    text-align: center;
+    color: white;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .login-hero-mark {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: white;
+    margin: 0 auto 18px;
+    position: relative;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+  .login-hero-mark::after {
+    content: "";
+    position: absolute;
+    width: 22px; height: 22px;
+    background: #5BA8D6;
+    border-radius: 50%;
+    top: 14px; left: 14px;
+  }
+
+  .login-hero h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin-bottom: 6px;
+  }
+  .login-hero h1 small {
+    font-weight: 500;
+    font-size: 18px;
+    margin-left: 2px;
+    opacity: 0.85;
+  }
+  .login-hero .tagline {
+    font-size: 14px;
+    color: rgba(255,255,255,0.88);
+    letter-spacing: 0.02em;
+  }
+
+  .login-card {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 20px 48px rgba(0,0,0,0.18);
+    position: relative;
+    z-index: 1;
+  }
+
+  .login-card h2 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+    color: #0F1419;
+  }
+  .login-card .subtitle {
+    color: #6B7280;
+    margin-bottom: 22px;
+    font-size: 13px;
+  }
+
+  .field { margin-bottom: 14px; }
+  .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: #4B5563;
+    margin-bottom: 6px;
+  }
+  .input {
+    width: 100%;
+    height: 42px;
+    padding: 0 14px;
+    background: white;
+    border: 1px solid #DCE0E5;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #0F1419;
+    outline: none;
+    transition: border-color 140ms, box-shadow 140ms;
+  }
+  .input:focus {
+    border-color: #5BA8D6;
+    box-shadow: 0 0 0 3px rgba(91,168,214,0.18);
+  }
+
+  .login-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 6px 0 20px;
+  }
+  .check {
+    display: flex; align-items: center; gap: 8px;
+    color: #4B5563; font-size: 13px;
+    user-select: none;
+    cursor: pointer;
+  }
+  .check input { width: 14px; height: 14px; accent-color: #5BA8D6; cursor: pointer; }
+  .link {
+    color: #3F8DBC;
+    font-size: 13px;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .link:hover { text-decoration: underline; color: #2D6F99; }
+
+  .btn-primary {
+    width: 100%;
+    height: 44px;
+    background: #5BA8D6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 140ms, box-shadow 140ms, transform 80ms;
+    box-shadow: 0 4px 12px rgba(91,168,214,0.30);
+  }
+  .btn-primary:hover { background: #3F8DBC; box-shadow: 0 6px 16px rgba(91,168,214,0.40); }
+  .btn-primary:active { transform: translateY(1px); }
+
+  .login-foot {
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px solid #EAECEF;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #9CA3AF;
+    font-size: 11px;
+  }
+  .pip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .pip-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #15803D;
+    box-shadow: 0 0 0 2px #DCFCE7;
+  }
+
+
+  /* ==========================================================
+     DASHBOARD — brand blue accents replacing black
+     ========================================================== */
+  #screen-dash.active { flex-direction: row; }
+
+  .sidebar {
+    width: 232px;
+    flex-shrink: 0;
+    background: white;
+    border-right: 1px solid #EAECEF;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  .sidebar-head {
+    padding: 18px;
+    border-bottom: 1px solid #EAECEF;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sidebar-head .mark {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: #5BA8D6;
+    position: relative;
+  }
+  .sidebar-head .mark::after {
+    content: ""; position: absolute;
+    width: 7px; height: 7px;
+    background: white; border-radius: 50%;
+    top: 5px; left: 5px;
+  }
+  .sidebar-head .word {
+    font-weight: 700; font-size: 15px; letter-spacing: -0.025em;
+  }
+  .sidebar-head .word small {
+    color: #6B7280; font-weight: 500; margin-left: 4px;
+  }
+
+  .sidebar-nav {
+    flex: 1;
+    padding: 12px 10px;
+    overflow-y: auto;
+  }
+  .nav-section {
+    padding: 12px 8px 6px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.10em;
+    color: #9CA3AF;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #4B5563;
+    font-weight: 500;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 1px;
+    transition: background 100ms, color 100ms;
+  }
+  .nav-item:hover { background: #F4F9FC; color: #3F8DBC; }
+  /* Active = brand blue, not black */
+  .nav-item.active {
+    background: #5BA8D6;
+    color: white;
+  }
+  .nav-item.featured {
+    background: #F18A1F;
+    color: white;
+    margin: 4px 0;
+  }
+  .nav-item.featured:hover { background: #DC7510; color: white; }
+  .nav-item .nav-icon { width: 16px; height: 16px; flex-shrink: 0; color: #6B7280; }
+  .nav-item.active .nav-icon, .nav-item.featured .nav-icon { color: white; }
+  .nav-item .badge {
+    margin-left: auto;
+    font-size: 10px;
+    padding: 2px 7px;
+    background: #EEF0F3;
+    color: #6B7280;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+  .nav-item.featured .badge { background: rgba(255,255,255,0.22); color: white; }
+  .nav-item.active .badge { background: rgba(255,255,255,0.22); color: white; }
+
+  .sidebar-foot {
+    padding: 12px;
+    border-top: 1px solid #EAECEF;
+  }
+  .user-card {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+  }
+  .user-card:hover { background: #F4F9FC; }
+  .avatar {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: #5BA8D6;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .user-meta { flex: 1; min-width: 0; }
+  .user-name { font-size: 13px; font-weight: 600; color: #0F1419; }
+  .user-station { font-size: 11px; color: #6B7280; }
+
+  .dash-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    min-width: 0;
+  }
+  .dash-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 28px;
+    border-bottom: 1px solid #EAECEF;
+    background: white;
+    flex-shrink: 0;
+  }
+  .breadcrumb {
+    font-size: 13px;
+    color: #6B7280;
+  }
+  .breadcrumb b { color: #0F1419; font-weight: 600; }
+  .topbar-actions { display: flex; gap: 8px; align-items: center; }
+
+  .search-wrap { position: relative; }
+  .search-wrap svg {
+    position: absolute;
+    left: 12px; top: 50%;
+    transform: translateY(-50%);
+    width: 14px; height: 14px;
+    color: #9CA3AF;
+    pointer-events: none;
+  }
+  .topbar-search {
+    height: 36px;
+    width: 260px;
+    padding: 0 14px 0 36px;
+    background: white;
+    border: 1px solid #DCE0E5;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #0F1419;
+    outline: none;
+  }
+  .topbar-search::placeholder { color: #9CA3AF; }
+  .topbar-search:focus { border-color: #5BA8D6; box-shadow: 0 0 0 3px rgba(91,168,214,0.15); }
+
+  .icon-btn {
+    width: 36px; height: 36px;
+    border: 1px solid #DCE0E5;
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4B5563;
+    position: relative;
+  }
+  .icon-btn:hover { background: #F4F9FC; color: #3F8DBC; }
+  .icon-btn .indicator {
+    position: absolute;
+    top: 7px; right: 7px;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #F18A1F;
+    border: 1.5px solid white;
+  }
+
+  .dash-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 28px;
+  }
+
+  /* PROMINENT REGISTER HERO BANNER — much more obvious CTA */
+  .register-hero {
+    background: linear-gradient(135deg, #F18A1F 0%, #DC7510 100%);
+    border-radius: 16px;
+    padding: 24px 28px;
+    color: white;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    box-shadow: 0 6px 20px rgba(241,138,31,0.25);
+    position: relative;
+    overflow: hidden;
+  }
+  .register-hero::before {
+    content: "";
+    position: absolute;
+    top: -40%; right: -10%;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .register-hero-text {
+    position: relative;
+  }
+  .register-hero-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 6px;
+  }
+  .register-hero h2 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  .register-hero p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+  }
+  .register-hero-btn {
+    background: white;
+    color: #DC7510;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+    position: relative;
+    transition: transform 80ms, box-shadow 140ms;
+    flex-shrink: 0;
+  }
+  .register-hero-btn:hover { box-shadow: 0 8px 20px rgba(0,0,0,0.15); transform: translateY(-1px); }
+  .register-hero-btn:active { transform: translateY(0); }
+  .register-hero-btn .arrow {
+    transition: transform 140ms;
+  }
+  .register-hero-btn:hover .arrow { transform: translateX(3px); }
+
+  .page-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 18px;
+  }
+  .page-head h1 {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    margin-bottom: 4px;
+  }
+  .page-head .sub {
+    color: #6B7280;
+    font-size: 13px;
+  }
+
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .kpi {
+    background: white;
+    border: 1px solid #EAECEF;
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: border-color 140ms, box-shadow 140ms;
+  }
+  .kpi:hover { border-color: #DCE0E5; box-shadow: 0 1px 3px rgba(15,20,25,0.06); }
+  /* Featured KPI is brand blue, not black */
+  .kpi.featured {
+    background: linear-gradient(135deg, #5BA8D6 0%, #3F8DBC 100%);
+    color: white;
+    border-color: #3F8DBC;
+    box-shadow: 0 4px 14px rgba(91,168,214,0.25);
+  }
+  .kpi-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .kpi-label { font-size: 12px; color: #6B7280; font-weight: 500; }
+  .kpi.featured .kpi-label { color: rgba(255,255,255,0.80); }
+  .kpi-icon {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    background: #F4F9FC;
+    color: #3F8DBC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .kpi.featured .kpi-icon { background: rgba(255,255,255,0.18); color: white; }
+  /* Each non-featured KPI gets its own subtle accent color */
+  .kpi.k-orange .kpi-icon { background: #FEF1DD; color: #DC7510; }
+  .kpi.k-green .kpi-icon { background: #DCFCE7; color: #15803D; }
+  .kpi.k-amber .kpi-icon { background: #FEF3C7; color: #B45309; }
+  .kpi-value {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #0F1419;
+  }
+  .kpi.featured .kpi-value { color: white; }
+  .kpi-delta {
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 500;
+  }
+  .kpi-delta.up { color: #15803D; }
+  .kpi-delta.down { color: #B91C1C; }
+  .kpi.featured .kpi-delta.up { color: #BBF7D0; }
+
+  .panel-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .panel {
+    background: white;
+    border: 1px solid #EAECEF;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .panel-head {
+    padding: 14px 18px;
+    border-bottom: 1px solid #EAECEF;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .panel-head h3 { font-size: 14px; font-weight: 600; }
+  .panel-head .link-sm { font-size: 12px; color: #3F8DBC; text-decoration: none; font-weight: 500; }
+  .panel-head .link-sm:hover { color: #2D6F99; }
+  .panel-body { padding: 8px; }
+
+  .quick-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .quick {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    transition: background 120ms;
+  }
+  .quick:hover { background: #F4F9FC; }
+  .quick-icon {
+    width: 34px; height: 34px;
+    border-radius: 9px;
+    background: #F4F5F7;
+    color: #4B5563;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .quick-icon.orange { background: #FEF1DD; color: #DC7510; }
+  .quick-icon.blue { background: #E8F2FA; color: #3F8DBC; }
+  .quick-icon.green { background: #DCFCE7; color: #15803D; }
+  .quick-icon.amber { background: #FEF3C7; color: #B45309; }
+  .quick-name { font-size: 13px; font-weight: 600; color: #0F1419; }
+  .quick-sub { font-size: 11px; color: #6B7280; }
+
+  .activity-list { padding: 4px; }
+  .activity-row {
+    display: grid;
+    grid-template-columns: 32px 1fr auto;
+    gap: 10px;
+    align-items: center;
+    padding: 10px 12px;
+    border-radius: 8px;
+    transition: background 120ms;
+  }
+  .activity-row:hover { background: #F4F9FC; }
+  .activity-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: #DCFCE7;
+    color: #15803D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .activity-title { font-size: 13px; font-weight: 500; color: #0F1419; }
+  .activity-sub { font-size: 11px; color: #6B7280; }
+  .activity-amount {
+    font-size: 13px;
+    font-weight: 600;
+    color: #15803D;
+  }
+
+  .demo-note {
+    margin-top: 18px;
+    padding: 10px 14px;
+    background: #F4F9FC;
+    border: 1px dashed #B5D4F4;
+    border-radius: 8px;
+    font-size: 11px;
+    color: #3F8DBC;
+    text-align: center;
+  }
+
+
+  /* ==========================================================
+     POS — alive, colorful, brand-forward
+     ========================================================== */
+  #screen-pos.active { flex-direction: column; }
+
+  .pos-topbar {
+    height: 52px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+    gap: 14px;
+    background: linear-gradient(90deg, #5BA8D6 0%, #3F8DBC 100%);
+    color: white;
+  }
+  .pos-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px 7px 8px;
+    border-radius: 8px;
+    color: white;
+    background: rgba(255,255,255,0.18);
+    border: none;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .pos-back:hover { background: rgba(255,255,255,0.28); }
+  .topbar-divider { width: 1px; height: 24px; background: rgba(255,255,255,0.25); }
+  .pos-topbar-logo {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .pos-topbar-logo .mark {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: white; position: relative;
+  }
+  .pos-topbar-logo .mark::after {
+    content: ""; position: absolute;
+    width: 7px; height: 7px;
+    background: #5BA8D6; border-radius: 50%;
+    top: 5px; left: 5px;
+  }
+  .pos-topbar-logo .word { font-weight: 700; font-size: 14px; letter-spacing: -0.025em; }
+  .pos-topbar-logo .word small { color: rgba(255,255,255,0.80); font-weight: 500; margin-left: 4px; }
+
+  .order-id { font-size: 13px; color: rgba(255,255,255,0.85); }
+  .order-id b { color: white; font-weight: 700; }
+  .pos-spacer { flex: 1; }
+  .pos-clock { font-size: 13px; color: rgba(255,255,255,0.85); font-weight: 500; }
+
+  .pos-topbar .avatar {
+    background: white;
+    color: #3F8DBC;
+  }
+
+  .pos-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: minmax(560px, 1fr) minmax(540px, 1.05fr);
+    gap: 12px;
+    padding: 12px;
+    overflow: hidden;
+    min-height: 0;
+    background: #FAFBFC;
+  }
+
+  .pos-left {
+    display: grid;
+    grid-template-rows: auto 1fr auto auto;
+    gap: 10px;
+    min-height: 0;
+  }
+
+  /* Totals card — orange branded gradient, alive */
+  .totals-card {
+    background: linear-gradient(135deg, #F18A1F 0%, #DC7510 100%);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 18px 22px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 4px 16px rgba(241,138,31,0.20);
+    position: relative;
+    overflow: hidden;
+  }
+  .totals-card::before {
+    content: "";
+    position: absolute;
+    top: -50%; right: -10%;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .totals-rows { display: flex; flex-direction: column; gap: 3px; position: relative; }
+  .totals-row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .totals-row .lbl { font-size: 12px; color: rgba(255,255,255,0.85); font-weight: 500; }
+  .totals-row .val { font-size: 14px; color: white; font-weight: 600; }
+  .totals-row.grand { margin-top: 4px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.20); }
+  .totals-row.grand .lbl {
+    font-size: 11px;
+    color: rgba(255,255,255,0.85);
+    text-transform: uppercase;
+    letter-spacing: 0.10em;
+    font-weight: 700;
+  }
+  .totals-row.grand .val {
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: white;
+  }
+  .totals-meta { text-align: right; font-size: 11px; color: rgba(255,255,255,0.85); position: relative; }
+  .order-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.20);
+    padding: 5px 12px;
+    border-radius: 999px;
+    color: white;
+    font-weight: 700;
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+  .order-pill .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #BBF7D0;
+  }
+
+  /* Lines card — clean white, accent header */
+  .lines-card {
+    background: white;
+    border: 1px solid #EAECEF;
+    border-radius: 12px;
+    display: grid;
+    grid-template-columns: 1fr 56px;
+    overflow: hidden;
+    min-height: 0;
+  }
+  .lines-list { display: flex; flex-direction: column; overflow: hidden; min-height: 0; }
+  .lines-header {
+    display: grid;
+    grid-template-columns: 1fr 70px 90px 28px;
+    padding: 11px 14px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: white;
+    border-bottom: none;
+    background: #5BA8D6;
+  }
+  .lines-header span:nth-child(2), .lines-header span:nth-child(3) { text-align: right; }
+  .lines-body { flex: 1; overflow-y: auto; min-height: 0; }
+  .lines-body::-webkit-scrollbar { width: 6px; }
+  .lines-body::-webkit-scrollbar-thumb { background: #EAECEF; border-radius: 3px; }
+
+  .line {
+    display: grid;
+    grid-template-columns: 1fr 70px 90px 28px;
+    padding: 11px 14px;
+    align-items: center;
+    border-bottom: 1px solid #EAECEF;
+    transition: background 100ms;
+  }
+  .line:last-child { border-bottom: none; }
+  .line:hover { background: #F4F9FC; }
+  .line.selected {
+    background: #FDF8EE;
+    box-shadow: inset 4px 0 0 0 #F18A1F;
+  }
+  .line-name {
+    font-weight: 500;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .line-emoji {
+    font-size: 14px;
+    width: 24px; height: 24px;
+    background: #F4F5F7;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .line-qty { text-align: right; font-weight: 600; color: #4B5563; font-size: 13px; }
+  .line-price { text-align: right; font-weight: 700; font-size: 13px; color: #0F1419; }
+  .line-trash {
+    color: #9CA3AF;
+    width: 22px; height: 22px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+  }
+  .line-trash:hover { background: #FEE2E2; color: #B91C1C; }
+
+  .lines-empty {
+    flex: 1;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    color: #6B7280; text-align: center;
+    padding: 32px; gap: 12px;
+  }
+  .empty-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: #F4F9FC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #5BA8D6;
+  }
+  .lines-empty .ttl { font-weight: 600; font-size: 14px; color: #0F1419; }
+  .lines-empty .sub { font-size: 12px; max-width: 32ch; }
+
+  /* Numpad — branded accents */
+  .numpad {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px;
+    background: #F4F9FC;
+    border-left: 1px solid #EAECEF;
+  }
+  .numpad-btn {
+    flex: 1;
+    border: 1px solid #DCE0E5;
+    background: white;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3F8DBC;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background 100ms, border-color 100ms, color 100ms, transform 60ms;
+  }
+  .numpad-btn:hover { background: #5BA8D6; border-color: #5BA8D6; color: white; }
+  .numpad-btn:active { transform: scale(0.95); }
+  .numpad-btn.accent { color: #DC7510; }
+  .numpad-btn.accent:hover { background: #F18A1F; border-color: #F18A1F; color: white; }
+
+  /* Action buttons — colored tints by purpose */
+  .action-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 6px;
+  }
+  .act {
+    height: 48px;
+    border: 1px solid #EAECEF;
+    background: white;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 12px;
+    color: #0F1419;
+    padding: 4px 8px;
+    text-align: center;
+    transition: background 120ms, border-color 120ms, color 120ms, transform 60ms;
+  }
+  .act:hover { background: #F4F9FC; border-color: #5BA8D6; color: #3F8DBC; }
+  .act:active { transform: translateY(1px); }
+  .act.danger { color: #B91C1C; border-color: #FECACA; background: #FEF2F2; }
+  .act.danger:hover { background: #FEE2E2; border-color: #B91C1C; color: #B91C1C; }
+  .act.warn { color: #B45309; border-color: #FED7AA; background: #FFFBEB; }
+  .act.warn:hover { background: #FEF3C7; border-color: #B45309; color: #B45309; }
+  .act.info { color: #3F8DBC; border-color: #B5D4F4; background: #F4F9FC; }
+  .act.info:hover { background: #E8F2FA; border-color: #3F8DBC; color: #2D6F99; }
+
+  .pos-right {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 10px;
+    min-height: 0;
+  }
+
+  .search-bar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 6px;
+    background: white;
+    border: 1px solid #EAECEF;
+    border-radius: 12px;
+    padding: 5px;
+  }
+  .search-input-wrap { position: relative; background: white; }
+  .search-input-wrap svg {
+    position: absolute;
+    left: 12px; top: 50%;
+    transform: translateY(-50%);
+    width: 14px; height: 14px;
+    color: #5BA8D6;
+    pointer-events: none;
+  }
+  .search-input-wrap input {
+    width: 100%;
+    height: 38px;
+    border: none;
+    background: white;
+    padding: 0 12px 0 34px;
+    font-size: 13px;
+    color: #0F1419;
+    outline: none;
+  }
+  .search-input-wrap input::placeholder { color: #9CA3AF; }
+  .keyboard-btn {
+    width: 44px;
+    height: 38px;
+    border: 1px solid #EAECEF;
+    background: #F4F9FC;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3F8DBC;
+  }
+  .keyboard-btn:hover { background: #5BA8D6; color: white; }
+
+  /* Customer banner — brand blue accent */
+  .customer-banner {
+    background: linear-gradient(90deg, #F4F9FC 0%, #E8F2FA 100%);
+    border: 1px solid #B5D4F4;
+    border-left: 4px solid #5BA8D6;
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 120ms;
+  }
+  .customer-banner:hover { background: #E8F2FA; }
+  .customer-banner-left {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 13px;
+  }
+  .customer-banner-left .ico {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: #5BA8D6;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .customer-banner-left .label { color: #3F8DBC; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+  .customer-banner-left .name { font-weight: 600; color: #0F1419; }
+  .customer-banner-right { font-size: 12px; color: #3F8DBC; font-weight: 600; }
+
+  /* Catalog */
+  .catalog-split {
+    display: grid;
+    grid-template-columns: 184px 1fr;
+    background: white;
+    border: 1px solid #EAECEF;
+    border-radius: 12px;
+    overflow: hidden;
+    min-height: 0;
+  }
+  .col-head {
+    padding: 11px 14px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: white;
+    background: #5BA8D6;
+  }
+  .categories-col {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #EAECEF;
+    min-height: 0;
+  }
+  .categories-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 6px;
+    min-height: 0;
+  }
+  .cat-btn {
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: transparent;
+    padding: 11px 12px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 13px;
+    color: #4B5563;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 100ms, color 100ms;
+  }
+  .cat-btn:hover { background: #F4F9FC; color: #3F8DBC; }
+  .cat-btn.active {
+    background: #F18A1F;
+    color: white;
+  }
+  .cat-btn .count {
+    font-size: 11px;
+    color: #9CA3AF;
+    font-weight: 600;
+    background: #F4F5F7;
+    padding: 1px 7px;
+    border-radius: 999px;
+  }
+  .cat-btn.active .count { color: white; background: rgba(255,255,255,0.22); }
+
+  .items-col { display: flex; flex-direction: column; min-height: 0; }
+  .items-grid {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    align-content: start;
+    min-height: 0;
+  }
+
+  .item-tile {
+    background: white;
+    border: 1px solid #EAECEF;
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 110px;
+    text-align: left;
+    transition: transform 100ms, border-color 120ms, box-shadow 120ms;
+  }
+  .item-tile:hover {
+    border-color: #5BA8D6;
+    box-shadow: 0 2px 8px rgba(91,168,214,0.15);
+    transform: translateY(-2px);
+  }
+  .item-tile.added {
+    border-color: #F18A1F;
+    box-shadow: 0 0 0 4px rgba(241,138,31,0.18);
+  }
+  .item-emoji-tile {
+    font-size: 22px;
+    width: 36px; height: 36px;
+    background: #F4F9FC;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .item-name { font-size: 12px; font-weight: 600; line-height: 1.3; flex: 1; color: #0F1419; }
+  .item-foot { display: flex; justify-content: space-between; align-items: center; }
+  .item-price { font-weight: 700; font-size: 13px; color: #DC7510; }
+  .item-stock {
+    font-size: 10px;
+    color: #15803D;
+    font-weight: 600;
+    background: #DCFCE7;
+    padding: 2px 6px;
+    border-radius: 999px;
+  }
+  .item-stock.low { color: #B45309; background: #FEF3C7; }
+
+  /* Charge button — bigger, more dramatic */
+  .finish-btn {
+    height: 72px;
+    background: linear-gradient(135deg, #F18A1F 0%, #DC7510 100%);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 26px;
+    box-shadow: 0 6px 18px rgba(241,138,31,0.32);
+    transition: box-shadow 140ms, transform 80ms;
+  }
+  .finish-btn:hover { box-shadow: 0 10px 24px rgba(241,138,31,0.40); transform: translateY(-1px); }
+  .finish-btn:active { transform: translateY(0); }
+  .finish-btn:disabled {
+    background: #EEF0F3;
+    color: #9CA3AF;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+  .finish-btn .label-row { display: flex; align-items: center; gap: 12px; }
+  .finish-amount { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; }
+
+  .pos-statusbar {
+    height: 32px;
+    flex-shrink: 0;
+    background: white;
+    border-top: 1px solid #EAECEF;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    color: #6B7280;
+    overflow-x: auto;
+  }
+  .fkey {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 6px;
+    border-radius: 4px;
+    transition: background 100ms;
+  }
+  .fkey:hover { background: #F4F9FC; color: #3F8DBC; }
+  .fkey b {
+    font-size: 9px;
+    background: #5BA8D6;
+    color: white;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-weight: 700;
+    font-family: monospace;
+  }
+  .fkey-divider { color: #DCE0E5; }
+  .pos-statusbar-right {
+    margin-left: auto;
+    display: flex;
+    gap: 14px;
+    color: #9CA3AF;
+  }
+
+  /* Sale flash */
+  .flash {
+    position: fixed;
+    inset: 0;
+    background: rgba(15,20,25,0.55);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+  .flash.show { display: flex; }
+  .flash-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 48px;
+    text-align: center;
+    min-width: 360px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.30);
+  }
+  .flash-check {
+    width: 64px; height: 64px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: #DCFCE7;
+    color: #15803D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .flash h3 {
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 4px;
+    color: #0F1419;
+  }
+  .flash p {
+    color: #6B7280;
+    font-size: 13px;
+    margin-bottom: 18px;
+  }
+  .flash-amount {
+    font-weight: 800;
+    font-size: 40px;
+    color: #DC7510;
+    letter-spacing: -0.02em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<section class="screen active" id="screen-login">
+  <div class="login-hero">
+    <div class="login-hero-mark"></div>
+    <h1>SimpleTouch<small>POS</small></h1>
+    <div class="tagline">Point of Sale software for cafés &amp; restaurants</div>
+  </div>
+
+  <div class="login-card">
+    <h2>Sign in to your station</h2>
+    <p class="subtitle">Enter your credentials to start your shift.</p>
+    <form onsubmit="event.preventDefault(); showScreen('dash');">
+      <div class="field">
+        <label for="user">User name</label>
+        <input id="user" class="input" type="text" placeholder="company@mail.com" />
+      </div>
+      <div class="field">
+        <label for="pwd">Password</label>
+        <input id="pwd" class="input" type="password" placeholder="••••••••" />
+      </div>
+      <div class="login-row">
+        <label class="check">
+          <input type="checkbox" />
+          Remember this station
+        </label>
+        <a class="link" href="#">Forgot password?</a>
+      </div>
+      <button type="submit" class="btn-primary">
+        Sign in →
+      </button>
+      <div class="login-foot">
+        <span class="pip">
+          <span class="pip-dot"></span>
+          Station WEAPONX · Online
+        </span>
+        <span>v2026.3.0</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+
+<!-- ============ DASHBOARD ============ -->
+<section class="screen" id="screen-dash">
+  <aside class="sidebar">
+    <div class="sidebar-head">
+      <div class="mark"></div>
+      <span class="word">SimpleTouch<small>POS</small></span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">Main</div>
+      <button class="nav-item active">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        Dashboard
+      </button>
+      <button class="nav-item featured" onclick="showScreen('pos')">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>
+        Point of Sale
+        <span class="badge">⌘P</span>
+      </button>
+      <button class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg>
+        Inventory
+      </button>
+      <button class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 3v4a1 1 0 001 1h4M5 21V5a2 2 0 012-2h7l5 5v13a2 2 0 01-2 2H7a2 2 0 01-2-2zM9 13l2 2 4-4"/></svg>
+        Reports
+      </button>
+      <button class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        Customers
+      </button>
+      <div class="nav-section">Configure</div>
+      <button class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>
+        Categories &amp; Items
+      </button>
+      <button class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17h2l1-3h12l1 3h2"/><circle cx="7.5" cy="17.5" r="2"/><circle cx="16.5" cy="17.5" r="2"/><path d="M5 14V8h11l3 6"/></svg>
+        Suppliers
+      </button>
+      <button class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9"/></svg>
+        Settings
+      </button>
+    </nav>
+    <div class="sidebar-foot">
+      <button class="user-card" onclick="showScreen('login')">
+        <div class="avatar">A</div>
+        <div class="user-meta">
+          <div class="user-name">Admin</div>
+          <div class="user-station">Station WEAPONX</div>
+        </div>
+      </button>
+    </div>
+  </aside>
+
+  <div class="dash-main">
+    <div class="dash-topbar">
+      <div class="breadcrumb">Home / <b>Dashboard</b></div>
+      <div class="topbar-actions">
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input class="topbar-search" placeholder="Search…" />
+        </div>
+        <button class="icon-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
+          <span class="indicator"></span>
+        </button>
+        <button class="icon-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 015.8 1c0 2-3 3-3 3M12 17h.01"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="dash-content">
+      <!-- Hero CTA banner — way more obvious than a small button -->
+      <div class="register-hero">
+        <div class="register-hero-text">
+          <div class="register-hero-eyebrow">Ready when you are</div>
+          <h2>Open the register to start ringing up orders</h2>
+          <p>Quick, calm, and out of your way.</p>
+        </div>
+        <button class="register-hero-btn" onclick="showScreen('pos')">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M2 11h20"/><path d="M6 17h4"/><path d="M16 4l-2 3M8 4l2 3"/></svg>
+          Open Register
+          <span class="arrow">→</span>
+        </button>
+      </div>
+
+      <div class="page-head">
+        <div>
+          <h1>Today's overview</h1>
+          <div class="sub" id="todayDate">Here's what's happening today</div>
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi featured">
+          <div class="kpi-head">
+            <span class="kpi-label">Today's revenue</span>
+            <div class="kpi-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6"/></svg></div>
+          </div>
+          <div class="kpi-value">$1,284.50</div>
+          <span class="kpi-delta up">↑ +12% vs yesterday</span>
+        </div>
+        <div class="kpi k-orange">
+          <div class="kpi-head">
+            <span class="kpi-label">Transactions</span>
+            <div class="kpi-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3v4a1 1 0 001 1h4M5 21V5a2 2 0 012-2h7l5 5v13a2 2 0 01-2 2H7a2 2 0 01-2-2z"/></svg></div>
+          </div>
+          <div class="kpi-value">47</div>
+          <span class="kpi-delta up">↑ +8 since open</span>
+        </div>
+        <div class="kpi k-green">
+          <div class="kpi-head">
+            <span class="kpi-label">Avg ticket</span>
+            <div class="kpi-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          </div>
+          <div class="kpi-value">$27.32</div>
+          <span class="kpi-delta up">↑ +$2.10</span>
+        </div>
+        <div class="kpi k-amber">
+          <div class="kpi-head">
+            <span class="kpi-label">Low stock</span>
+            <div class="kpi-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+          </div>
+          <div class="kpi-value">3</div>
+          <span class="kpi-delta down">↓ Cold Brew, Nitro, Brownie</span>
+        </div>
+      </div>
+
+      <div class="panel-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Quick actions</h3>
+            <a class="link-sm" href="#">View all →</a>
+          </div>
+          <div class="panel-body">
+            <div class="quick-grid">
+              <button class="quick" onclick="showScreen('pos')">
+                <div class="quick-icon orange"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg></div>
+                <div><div class="quick-name">New sale</div><div class="quick-sub">Open register</div></div>
+              </button>
+              <button class="quick">
+                <div class="quick-icon blue"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg></div>
+                <div><div class="quick-name">Add item</div><div class="quick-sub">Menu builder</div></div>
+              </button>
+              <button class="quick">
+                <div class="quick-icon green"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3v18h18M7 14l4-4 4 4 5-5"/></svg></div>
+                <div><div class="quick-name">Daily report</div><div class="quick-sub">Z-out summary</div></div>
+              </button>
+              <button class="quick">
+                <div class="quick-icon amber"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="13" rx="2"/></svg></div>
+                <div><div class="quick-name">Open drawer</div><div class="quick-sub">No-sale</div></div>
+              </button>
+              <button class="quick">
+                <div class="quick-icon blue"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+                <div><div class="quick-name">Add customer</div><div class="quick-sub">CRM</div></div>
+              </button>
+              <button class="quick">
+                <div class="quick-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9"/></svg></div>
+                <div><div class="quick-name">Settings</div><div class="quick-sub">Preferences</div></div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Recent transactions</h3>
+            <a class="link-sm" href="#">View all →</a>
+          </div>
+          <div class="activity-list" id="activityList"></div>
+        </div>
+      </div>
+
+      <div class="demo-note">Demo data shown for preview · Real numbers will populate once connected to your station</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ POS ============ -->
+<section class="screen" id="screen-pos">
+  <div class="pos-topbar">
+    <button class="pos-back" onclick="showScreen('dash')">
+      ← Back
+    </button>
+    <div class="topbar-divider"></div>
+    <div class="pos-topbar-logo">
+      <div class="mark"></div>
+      <span class="word">SimpleTouch<small>POS</small></span>
+    </div>
+    <div class="topbar-divider"></div>
+    <div class="order-id">Invoice <b id="orderId">#INV-0048</b></div>
+    <div class="pos-spacer"></div>
+    <span class="pos-clock" id="clock">—</span>
+    <div class="topbar-divider"></div>
+    <div style="display: flex; align-items: center; gap: 8px; padding: 4px 8px;">
+      <div class="avatar" style="width: 26px; height: 26px; font-size: 11px;">A</div>
+      <span style="font-size: 13px; font-weight: 600; color: white;">Admin</span>
+    </div>
+  </div>
+
+  <div class="pos-body">
+    <div class="pos-left">
+      <div class="totals-card">
+        <div class="totals-rows">
+          <div class="totals-row">
+            <span class="lbl">Sub Total</span>
+            <span class="val num" id="subtotal">$0.00</span>
+          </div>
+          <div class="totals-row">
+            <span class="lbl">Tax (8.25%)</span>
+            <span class="val num" id="tax">$0.00</span>
+          </div>
+          <div class="totals-row grand">
+            <span class="lbl">Total</span>
+            <span class="val num" id="total">$0.00</span>
+          </div>
+        </div>
+        <div class="totals-meta">
+          <div class="order-pill"><span class="dot"></span><span id="orderId2">INV-0048</span></div>
+          <div>Cash drawer · Open</div>
+        </div>
+      </div>
+
+      <div class="lines-card">
+        <div class="lines-list">
+          <div class="lines-header">
+            <span>Item Name</span>
+            <span>Qty</span>
+            <span>Price</span>
+            <span></span>
+          </div>
+          <div class="lines-body" id="lines"></div>
+        </div>
+        <div class="numpad">
+          <button class="numpad-btn" onclick="moveSelection(-1)">↑</button>
+          <button class="numpad-btn accent" onclick="changeQty(1)">+</button>
+          <button class="numpad-btn">#</button>
+          <button class="numpad-btn accent" onclick="changeQty(-1)">−</button>
+          <button class="numpad-btn" onclick="moveSelection(1)">↓</button>
+        </div>
+      </div>
+
+      <div class="action-row">
+        <button class="act danger" onclick="clearOrder()">Clear</button>
+        <button class="act danger" onclick="deleteSelected()">Delete</button>
+        <button class="act warn" onclick="holdOrder()">Hold</button>
+        <button class="act info">Recall</button>
+        <button class="act info">Change Price</button>
+        <button class="act info">Manual</button>
+      </div>
+      <div class="action-row">
+        <button class="act danger" onclick="showScreen('dash')">Exit</button>
+        <button class="act info">Options</button>
+        <button class="act warn">Payout</button>
+        <button class="act info">Customer Items</button>
+        <button class="act warn">Discount</button>
+        <button class="act info">English</button>
+      </div>
+    </div>
+
+    <div class="pos-right">
+      <div class="search-bar">
+        <div class="search-input-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input id="searchInput" placeholder="Search items or scan barcode…" />
+        </div>
+        <button class="keyboard-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M9 14h6"/></svg>
+        </button>
+      </div>
+
+      <div class="customer-banner">
+        <div class="customer-banner-left">
+          <div class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg></div>
+          <div>
+            <div class="label">Customer</div>
+            <div class="name">Cash Customer · Walk-in</div>
+          </div>
+        </div>
+        <div class="customer-banner-right">Change →</div>
+      </div>
+
+      <div class="catalog-split">
+        <div class="categories-col">
+          <div class="col-head">Categories</div>
+          <div class="categories-list" id="categories"></div>
+        </div>
+        <div class="items-col">
+          <div class="col-head">Items</div>
+          <div class="items-grid" id="items"></div>
+        </div>
+      </div>
+
+      <button class="finish-btn" id="payBtn" onclick="pay()" disabled>
+        <span class="label-row">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M2 10h20"/></svg>
+          Charge
+        </span>
+        <span class="finish-amount num" id="payAmount">$0.00</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="pos-statusbar">
+    <div class="fkey"><b>F2</b> Drawer</div>
+    <span class="fkey-divider">·</span>
+    <div class="fkey"><b>F3</b> Clear</div>
+    <span class="fkey-divider">·</span>
+    <div class="fkey"><b>F4</b> Recall</div>
+    <span class="fkey-divider">·</span>
+    <div class="fkey"><b>F5</b> Finish</div>
+    <span class="fkey-divider">·</span>
+    <div class="fkey"><b>F6</b> Print</div>
+    <span class="fkey-divider">·</span>
+    <div class="fkey"><b>F7</b> Customer</div>
+    <span class="fkey-divider">·</span>
+    <div class="fkey"><b>F8</b> Price Check</div>
+    <div class="pos-statusbar-right">
+      <span>Station WEAPONX</span>
+      <span>v2026.3.0</span>
+    </div>
+  </div>
+</section>
+
+<div class="flash" id="flash">
+  <div class="flash-card">
+    <div class="flash-check">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>
+    </div>
+    <h3>Payment complete</h3>
+    <p>Receipt sent to printer</p>
+    <div class="flash-amount num" id="flashAmount">$0.00</div>
+  </div>
+</div>
+
+<script>
+  function showScreen(name) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + name).classList.add('active');
+  }
+
+  function tick() {
+    const t = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const el = document.getElementById('clock');
+    if (el) el.textContent = t;
+  }
+  tick(); setInterval(tick, 30000);
+
+  document.getElementById('todayDate').textContent =
+    new Date().toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' }) +
+    " · Here's what's happening today";
+
+  const transactions = [
+    { id: '0047', items: 3, ago: '2 min ago', method: 'Cash', amount: 24.50 },
+    { id: '0046', items: 1, ago: '8 min ago', method: 'Card', amount: 5.25 },
+    { id: '0045', items: 5, ago: '14 min ago', method: 'Card', amount: 48.75 },
+    { id: '0044', items: 2, ago: '22 min ago', method: 'Cash', amount: 12.00 },
+    { id: '0043', items: 4, ago: '31 min ago', method: 'Card', amount: 31.85 },
+  ];
+  const activityList = document.getElementById('activityList');
+  transactions.forEach(t => {
+    const row = document.createElement('div');
+    row.className = 'activity-row';
+    row.innerHTML = '<div class="activity-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg></div>' +
+      '<div><div class="activity-title">INV-' + t.id + ' · ' + t.items + ' item' + (t.items > 1 ? 's' : '') + '</div>' +
+      '<div class="activity-sub">' + t.ago + ' · ' + t.method + '</div></div>' +
+      '<div class="activity-amount">+$' + t.amount.toFixed(2) + '</div>';
+    activityList.appendChild(row);
+  });
+
+  const TAX_RATE = 0.0825;
+  const catalog = {
+    'Espresso': [
+      { id: 'esp', name: 'Espresso', emoji: '☕', price: 3.50, stock: 999 },
+      { id: 'mac', name: 'Macchiato', emoji: '☕', price: 4.00, stock: 999 },
+      { id: 'cor', name: 'Cortado', emoji: '☕', price: 4.50, stock: 999 },
+      { id: 'amr', name: 'Americano', emoji: '☕', price: 3.75, stock: 999 },
+      { id: 'lat', name: 'Latte', emoji: '🥛', price: 5.25, stock: 999 },
+      { id: 'cap', name: 'Cappuccino', emoji: '🥛', price: 5.00, stock: 999 },
+      { id: 'flw', name: 'Flat White', emoji: '🥛', price: 5.25, stock: 999 },
+      { id: 'moc', name: 'Mocha', emoji: '🍫', price: 5.75, stock: 999 },
+    ],
+    'Brewed': [
+      { id: 'drp', name: 'Drip Coffee', emoji: '☕', price: 3.00, stock: 999 },
+      { id: 'pov', name: 'Pour Over', emoji: '☕', price: 5.50, stock: 999 },
+      { id: 'col', name: 'Cold Brew', emoji: '🧊', price: 5.00, stock: 24 },
+      { id: 'nit', name: 'Nitro', emoji: '🧊', price: 6.00, stock: 8 },
+    ],
+    'Tea': [
+      { id: 'mat', name: 'Matcha Latte', emoji: '🍵', price: 5.75, stock: 999 },
+      { id: 'cha', name: 'Chai Latte', emoji: '🫖', price: 5.50, stock: 999 },
+      { id: 'erl', name: 'Earl Grey', emoji: '🫖', price: 4.00, stock: 999 },
+      { id: 'gtea', name: 'Green Tea', emoji: '🍵', price: 4.00, stock: 999 },
+    ],
+    'Pastries': [
+      { id: 'crs', name: 'Butter Croissant', emoji: '🥐', price: 4.25, stock: 12 },
+      { id: 'pac', name: 'Pain au Chocolat', emoji: '🥐', price: 4.75, stock: 8 },
+      { id: 'mfn', name: 'Blueberry Muffin', emoji: '🧁', price: 3.95, stock: 6 },
+      { id: 'sco', name: 'Cream Scone', emoji: '🍪', price: 3.75, stock: 9 },
+      { id: 'ckk', name: 'Choc Chip Cookie', emoji: '🍪', price: 3.50, stock: 18 },
+      { id: 'brn', name: 'Brownie', emoji: '🍫', price: 4.00, stock: 7 },
+    ],
+    'Sandwiches': [
+      { id: 'avo', name: 'Avocado Toast', emoji: '🥑', price: 9.50, stock: 14 },
+      { id: 'beg', name: 'Bacon Egg', emoji: '🥓', price: 8.75, stock: 10 },
+      { id: 'tur', name: 'Turkey & Brie', emoji: '🥪', price: 11.50, stock: 6 },
+      { id: 'ves', name: 'Veggie Stack', emoji: '🥗', price: 10.50, stock: 8 },
+      { id: 'che', name: 'Grilled Cheese', emoji: '🧀', price: 9.00, stock: 12 },
+    ],
+    'Cold Drinks': [
+      { id: 'orj', name: 'Fresh OJ', emoji: '🍊', price: 5.50, stock: 9 },
+      { id: 'lem', name: 'Lemonade', emoji: '🍋', price: 4.50, stock: 14 },
+      { id: 'spk', name: 'Sparkling Water', emoji: '💧', price: 3.50, stock: 24 },
+      { id: 'kom', name: 'Kombucha', emoji: '🍶', price: 5.75, stock: 11 },
+    ],
+  };
+
+  const cart = [];
+  let activeCat = 'Espresso';
+  let selectedIdx = -1;
+
+  const categoriesEl = document.getElementById('categories');
+  const itemsEl = document.getElementById('items');
+  const linesEl = document.getElementById('lines');
+
+  function renderCategories() {
+    categoriesEl.innerHTML = '';
+    Object.keys(catalog).forEach(cat => {
+      const btn = document.createElement('button');
+      btn.className = 'cat-btn' + (cat === activeCat ? ' active' : '');
+      btn.innerHTML = '<span>' + cat + '</span><span class="count">' + catalog[cat].length + '</span>';
+      btn.onclick = () => { activeCat = cat; renderCategories(); renderItems(); };
+      categoriesEl.appendChild(btn);
+    });
+  }
+
+  function renderItems() {
+    const q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+    let list = q
+      ? Object.values(catalog).flat().filter(i => i.name.toLowerCase().includes(q))
+      : (catalog[activeCat] || []);
+    itemsEl.innerHTML = '';
+    list.forEach(item => {
+      const el = document.createElement('button');
+      el.className = 'item-tile';
+      const stockClass = item.stock < 10 ? 'low' : '';
+      const stockText = item.stock >= 999 ? 'In stock' : item.stock + ' left';
+      el.innerHTML = '<div class="item-emoji-tile">' + item.emoji + '</div>' +
+        '<div class="item-name">' + item.name + '</div>' +
+        '<div class="item-foot">' +
+        '<span class="item-price num">$' + item.price.toFixed(2) + '</span>' +
+        '<span class="item-stock ' + stockClass + '">' + stockText + '</span></div>';
+      el.onclick = () => addToCart(item, el);
+      itemsEl.appendChild(el);
+    });
+  }
+
+  function addToCart(item, el) {
+    const existing = cart.find(c => c.id === item.id);
+    if (existing) existing.qty++;
+    else cart.push(Object.assign({}, item, { qty: 1 }));
+    if (el) {
+      el.classList.add('added');
+      setTimeout(() => el.classList.remove('added'), 380);
+    }
+    selectedIdx = cart.findIndex(c => c.id === item.id);
+    renderCart();
+  }
+
+  function changeQty(delta) {
+    if (selectedIdx < 0 || selectedIdx >= cart.length) return;
+    cart[selectedIdx].qty += delta;
+    if (cart[selectedIdx].qty <= 0) {
+      cart.splice(selectedIdx, 1);
+      if (selectedIdx >= cart.length) selectedIdx = cart.length - 1;
+    }
+    renderCart();
+  }
+
+  function moveSelection(delta) {
+    if (!cart.length) return;
+    selectedIdx = Math.max(0, Math.min(cart.length - 1, selectedIdx + delta));
+    renderCart();
+  }
+
+  function deleteSelected() {
+    if (selectedIdx < 0 || selectedIdx >= cart.length) return;
+    cart.splice(selectedIdx, 1);
+    if (selectedIdx >= cart.length) selectedIdx = cart.length - 1;
+    renderCart();
+  }
+
+  function renderCart() {
+    if (!cart.length) {
+      linesEl.innerHTML = '<div class="lines-empty">' +
+        '<div class="empty-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h2l3 13h12l3-9H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg></div>' +
+        '<div class="ttl">No items yet</div>' +
+        '<div class="sub">Tap items on the right or scan a barcode to start.</div></div>';
+    } else {
+      linesEl.innerHTML = '';
+      cart.forEach((line, i) => {
+        const el = document.createElement('div');
+        el.className = 'line' + (i === selectedIdx ? ' selected' : '');
+        el.innerHTML = '<div class="line-name"><span class="line-emoji">' + line.emoji + '</span>' + line.name + '</div>' +
+          '<div class="line-qty num">' + line.qty + '</div>' +
+          '<div class="line-price num">$' + (line.price * line.qty).toFixed(2) + '</div>' +
+          '<button class="line-trash" data-idx="' + i + '"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M6 6l1 14a2 2 0 002 2h6a2 2 0 002-2l1-14"/></svg></button>';
+        el.onclick = (e) => {
+          if (e.target.closest('.line-trash')) {
+            const idx = parseInt(e.target.closest('.line-trash').dataset.idx);
+            cart.splice(idx, 1);
+            if (selectedIdx >= cart.length) selectedIdx = cart.length - 1;
+          } else {
+            selectedIdx = i;
+          }
+          renderCart();
+        };
+        linesEl.appendChild(el);
+      });
+    }
+    const subtotal = cart.reduce((s, l) => s + l.price * l.qty, 0);
+    const tax = subtotal * TAX_RATE;
+    const total = subtotal + tax;
+    document.getElementById('subtotal').textContent = '$' + subtotal.toFixed(2);
+    document.getElementById('tax').textContent = '$' + tax.toFixed(2);
+    document.getElementById('total').textContent = '$' + total.toFixed(2);
+    document.getElementById('payAmount').textContent = '$' + total.toFixed(2);
+    document.getElementById('payBtn').disabled = cart.length === 0;
+  }
+
+  function clearOrder() {
+    cart.length = 0;
+    selectedIdx = -1;
+    renderCart();
+  }
+
+  function holdOrder() {
+    if (!cart.length) return;
+    clearOrder();
+    const id = 'INV-' + (Math.floor(Math.random() * 9000) + 1000);
+    document.getElementById('orderId').textContent = '#' + id;
+    document.getElementById('orderId2').textContent = id;
+  }
+
+  function pay() {
+    if (!cart.length) return;
+    const total = cart.reduce((s, l) => s + l.price * l.qty, 0) * (1 + TAX_RATE);
+    document.getElementById('flashAmount').textContent = '$' + total.toFixed(2);
+    document.getElementById('flash').classList.add('show');
+    setTimeout(() => {
+      document.getElementById('flash').classList.remove('show');
+      clearOrder();
+      const id = 'INV-' + (Math.floor(Math.random() * 9000) + 1000);
+      document.getElementById('orderId').textContent = '#' + id;
+      document.getElementById('orderId2').textContent = id;
+    }, 1500);
+  }
+
+  document.getElementById('searchInput').addEventListener('input', renderItems);
+
+  document.addEventListener('keydown', e => {
+    const screen = document.querySelector('.screen.active').id;
+    if (screen !== 'screen-pos') return;
+    if (e.key === 'F3') { e.preventDefault(); clearOrder(); }
+    if (e.key === 'F5') { e.preventDefault(); pay(); }
+    if (e.key === 'Escape') document.getElementById('flash').classList.remove('show');
+    if (e.key === 'ArrowUp' && document.activeElement.tagName !== 'INPUT') { e.preventDefault(); moveSelection(-1); }
+    if (e.key === 'ArrowDown' && document.activeElement.tagName !== 'INPUT') { e.preventDefault(); moveSelection(1); }
+    if ((e.key === '+' || e.key === '=') && document.activeElement.tagName !== 'INPUT') { e.preventDefault(); changeQty(1); }
+    if (e.key === '-' && document.activeElement.tagName !== 'INPUT') { e.preventDefault(); changeQty(-1); }
+  });
+
+  renderCategories();
+  renderItems();
+  renderCart();
+</script>
+</body>
+</html>
